@@ -5,149 +5,102 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blogs</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' type='text/css'>
     <link rel="stylesheet" href="css/blogs.css">
 </head>
 <body>
-    <div id="main">
-        <div class="container">
-            <div class="row">
 
-                <div class="wrapper">
-                    <div class="searchBar" style="width: 80%;">
-                        <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
-                        <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
-                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                <path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Content Start -->
-                <div class="col-md-12">
-                    <div class="col-md-12 page-body">
-                        <div class="row">
-                            <div class="col-md-12 content-page">
-                                <div class="col-md-12 blog-container" style = "margin-bottom: 50px;">
-                                    <!-- Blog posts will be dynamically loaded here -->
-                                </div>
-                                <!-- Pagination controls -->
-                                <div class="pagination-container">
-                                    <div class="pagination">
-                                        <a href="#" class="prev-page">Previous</a>
-                                        <span class="page-number">Page 1</span>
-                                        <a href="#" class="next-page">Next</a>
-                                    </div>
-                                </div>                        
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Content End -->
-            </div>
+    <!-- Search -->
+    <div class="search-wrapper">
+        <div class="search-bar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input id="searchInput" type="text" placeholder="Search posts..." autocomplete="off" />
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Post list -->
+    <div class="blog-list" id="blogList"></div>
+
+    <!-- Pagination -->
+    <div class="pagination-bar" id="paginationBar">
+        <button class="page-btn" id="prevBtn">&#8592; Previous</button>
+        <span class="page-info" id="pageInfo"></span>
+        <button class="page-btn" id="nextBtn">Next &#8594;</button>
+    </div>
+
     <script src="scripts/blogdata.js"></script>
-
     <script>
-        var blogContainer = document.querySelector('.blog-container');
-var originalBlogData = [...blogData]; // Make a copy of the original blog data
-var filteredBlogData = []; // Store filtered results
-var itemsPerPage = 2;
-var currentPage = 1;
-var totalPages = Math.ceil(originalBlogData.length / itemsPerPage);
-var prevPageLink = document.querySelector('.prev-page');
-var nextPageLink = document.querySelector('.next-page');
-var pageNumberSpan = document.querySelector('.page-number');
+        var ITEMS_PER_PAGE = 5;
+        var currentPage   = 1;
+        var activeData    = blogData;
 
-function updatePagination() {
-    pageNumberSpan.textContent = `Page ${currentPage}`;
-    
-    // Show or hide "Previous" button
-    prevPageLink.style.display = currentPage === 1 ? 'none' : 'inline';
-    
-    // Show or hide "Next" button
-    nextPageLink.style.display = currentPage === totalPages ? 'none' : 'inline';
-}
+        var listEl   = document.getElementById('blogList');
+        var prevBtn  = document.getElementById('prevBtn');
+        var nextBtn  = document.getElementById('nextBtn');
+        var pageInfo = document.getElementById('pageInfo');
 
-function updateBlogPosts() {
-    var startIndex = (currentPage - 1) * itemsPerPage;
-    var endIndex = startIndex + itemsPerPage;
+        function totalPages() {
+            return Math.max(1, Math.ceil(activeData.length / ITEMS_PER_PAGE));
+        }
 
-    blogContainer.innerHTML = '';
+        function render() {
+            var tp    = totalPages();
+            var start = (currentPage - 1) * ITEMS_PER_PAGE;
+            var slice = activeData.slice(start, start + ITEMS_PER_PAGE);
 
-    var dataToUse = filteredBlogData.length > 0 ? filteredBlogData : originalBlogData;
+            listEl.innerHTML = '';
 
-    for (var i = startIndex; i < endIndex && i < dataToUse.length; i++) {
-        var blogPost = document.createElement('div');
-        // blogPost.className = 'col-md-10';
+            if (slice.length === 0) {
+                listEl.innerHTML = '<p class="empty-state">No posts found.</p>';
+            } else {
+                slice.forEach(function(post) {
+                    var item = document.createElement('div');
+                    item.className = 'blog-item';
+                    item.setAttribute('onclick', "window.location='" + post.link + "'");
+                    item.innerHTML =
+                        '<a class="blog-item-title" href="' + post.link + '">' + escHtml(post.title) + '</a>' +
+                        '<div class="blog-item-meta">' + escHtml(post.date) + '</div>' +
+                        '<p class="blog-item-summary">' + escHtml(post.content) + '</p>' +
+                        '<span class="blog-item-link">Read more &#8594;</span>';
+                    listEl.appendChild(item);
+                });
+            }
 
-        blogPost.innerHTML = `
-            <div class="card">
-                <div class="post-title">
-                    <a href="${dataToUse[i].link}"><h2>${dataToUse[i].title}</h2></a>
-                </div>
-                <div class="post-info">
-                    <span>${dataToUse[i].date}</span>
-                </div>
-                <div class="post-content">
-                    <p>${dataToUse[i].content}</p>
-                </div>
-                <a href="${dataToUse[i].link}" class="read-more">Read More <i class="fas fa-long-arrow-right read-more-icon"></i></a>
-            </div>
-        `;
+            pageInfo.textContent = 'Page ' + currentPage + ' of ' + tp;
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === tp;
+        }
 
-        blogContainer.appendChild(blogPost);
-    }
+        function escHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
 
-    updatePagination();
-}
-
-
-prevPageLink.addEventListener('click', function(event) {
-    event.preventDefault();
-    if (currentPage > 1) {
-        currentPage--;
-        updateBlogPosts();
-    }
-});
-
-nextPageLink.addEventListener('click', function(event) {
-    event.preventDefault();
-    if (currentPage < totalPages) {
-        currentPage++;
-        updateBlogPosts();
-    }
-});
-
-updateBlogPosts();
-
-$(document).ready(function() {
-    $('#searchQueryInput').on('input', function() {
-        currentPage = 1; // Reset current page to 1
-        var searchText = $(this).val().toLowerCase();
-
-        // Populate the filteredBlogData array with filtered results
-        filteredBlogData = originalBlogData.filter(function(item) {
-            return item.title.toLowerCase().includes(searchText) || item.content.toLowerCase().includes(searchText);
+        prevBtn.addEventListener('click', function() {
+            if (currentPage > 1) { currentPage--; render(); }
         });
 
-        // Recalculate total pages based on filtered results
-        totalPages = Math.ceil(filteredBlogData.length / itemsPerPage);
+        nextBtn.addEventListener('click', function() {
+            if (currentPage < totalPages()) { currentPage++; render(); }
+        });
 
-        updateBlogPosts(); // Update displayed posts and pagination
-    });
-});
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var q = this.value.toLowerCase().trim();
+            activeData = q
+                ? blogData.filter(function(p) {
+                    return p.title.toLowerCase().includes(q) || p.content.toLowerCase().includes(q);
+                  })
+                : blogData;
+            currentPage = 1;
+            render();
+        });
 
+        render();
     </script>
 </body>
 </html>
