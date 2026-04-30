@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python: List vs Tuple vs Set vs Dict</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --text:    #111;
+            --muted:   #666;
+            --border:  #e5e5e5;
+            --code-bg: #f6f6f6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #fff;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            padding: 0 20px 80px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--text);
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--text); }
+
+        .read-time { font-size: 13px; color: var(--muted); }
+
+        .post-header { margin-bottom: 40px; }
+
+        .post-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .post-date { font-size: 14px; color: var(--muted); }
+
+        .post-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Body content ── */
+        #post-body h1 { font-size: 1.75rem; font-weight: 700; margin: 2em 0 0.5em; letter-spacing: -0.02em; }
+        #post-body h2 { font-size: 1.35rem; font-weight: 600; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+        #post-body h3 { font-size: 1.1rem;  font-weight: 600; margin: 1.75em 0 0.4em; }
+        #post-body h4 { font-size: 1rem;    font-weight: 600; margin: 1.5em 0 0.4em; }
+
+        #post-body p { margin-bottom: 1.25em; }
+
+        #post-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+        #post-body a:hover { opacity: 0.6; }
+
+        #post-body ul, #post-body ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+        #post-body li { margin-bottom: 0.35em; }
+        #post-body li > ul, #post-body li > ol { margin-top: 0.35em; margin-bottom: 0; }
+
+        #post-body hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+        #post-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 1em;
+            color: var(--muted);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        #post-body img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        #post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 14px;
+            display: block;
+            overflow-x: auto;
+        }
+        #post-body th, #post-body td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        #post-body th {
+            background: var(--code-bg);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        #post-body tr:nth-child(even) td { background: #fafafa; }
+
+        /* Code */
+        #post-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #post-body pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            line-height: 1.55;
+        }
+        #post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        /* Override highlight.js background so our border shows */
+        #post-body pre code.hljs { background: transparent; padding: 0; }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 0 16px 60px; }
+            .post { padding-top: 32px; }
+            .post-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="post">
+        <nav class="post-nav">
+            <a class="back-link" href="javascript:history.back()">
+                &#8592; Back
+            </a>
+            <span class="read-time">2 min read</span>
+        </nav>
+
+        <header class="post-header">
+            <h1>Python: List vs Tuple vs Set vs Dict</h1>
+            <p class="post-date">Published on Oct 26, 2021</p>
+        </header>
+
+        <hr class="post-divider">
+
+        <article id="post-body">
+<p>List, Tuple, Set, and Dictionary are fundamental data types in Python, each serving specific purposes. Selecting the appropriate type can significantly impact execution time and memory efficiency.</p>
+<h2>List</h2>
+<p>A list is a collection of items arranged in a specific order. You can access items using indices like <code>my_list[0]</code>. Lists are mutable — you can change the contents after creation.</p>
+<pre><code class="hljs language-python">python_list = [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.4</span>, <span class="hljs-string">&#x27;hello&#x27;</span>]
+<span class="hljs-built_in">print</span>(python_list)       <span class="hljs-comment"># [&#x27;one&#x27;, 2, 3.4, &#x27;hello&#x27;]</span>
+<span class="hljs-built_in">print</span>(python_list[<span class="hljs-number">3</span>])    <span class="hljs-comment"># hello</span>
+python_list[<span class="hljs-number">1</span>] = <span class="hljs-number">99</span>
+<span class="hljs-built_in">print</span>(python_list)       <span class="hljs-comment"># [&#x27;one&#x27;, 99, 3.4, &#x27;hello&#x27;]</span></code></pre>
+<h2>Tuple</h2>
+<p>Tuples are similar to lists but <strong>immutable</strong> — you cannot change their elements once assigned. They are faster than lists and ideal for storing constant values you only iterate through.</p>
+<pre><code class="hljs language-python">python_tuple = (<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;raju&#x27;</span>, <span class="hljs-number">28</span>, <span class="hljs-string">&#x27;abc&#x27;</span>)
+<span class="hljs-built_in">print</span>(python_tuple)      <span class="hljs-comment"># (1, &#x27;raju&#x27;, 28, &#x27;abc&#x27;)</span>
+<span class="hljs-built_in">print</span>(python_tuple[<span class="hljs-number">1</span>])   <span class="hljs-comment"># raju</span></code></pre>
+<h2>Set</h2>
+<p>A set is a collection that <strong>does not allow duplicates</strong>. It&#39;s excellent for fast membership checks (O(1)) and mathematical set operations, but it does not maintain insertion order.</p>
+<pre><code class="hljs language-python">python_set_1 = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
+<span class="hljs-built_in">print</span>(python_set_1)       <span class="hljs-comment"># {1, 2, 3}</span>
+
+python_set_2 = <span class="hljs-built_in">set</span>([<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;baz&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;qux&#x27;</span>])
+<span class="hljs-built_in">print</span>(python_set_2)       <span class="hljs-comment"># {&#x27;qux&#x27;, &#x27;foo&#x27;, &#x27;bar&#x27;, &#x27;baz&#x27;}</span></code></pre>
+<h2>Dictionary</h2>
+<p>A dictionary functions like a hash table, associating keys with values. Dictionaries are mutable and, since Python 3.7, maintain insertion order (similar to <code>LinkedHashMap</code> in Java).</p>
+<pre><code class="hljs language-python">python_dict = {<span class="hljs-string">&quot;Nishant&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;Akash&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;Ravi&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;Hari&quot;</span>: <span class="hljs-number">4</span>}
+<span class="hljs-built_in">print</span>(python_dict)           <span class="hljs-comment"># {&#x27;Nishant&#x27;: 1, &#x27;Akash&#x27;: 2, ...}</span>
+<span class="hljs-built_in">print</span>(python_dict[<span class="hljs-string">&quot;Akash&quot;</span>])  <span class="hljs-comment"># 2</span></code></pre>
+<blockquote>
+<p>Note: <code>a = {}</code> creates a <strong>dict</strong>, not a set. Use <code>a = set()</code> to create an empty set.</p>
+</blockquote>
+<h2>Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>List</th>
+<th>Tuple</th>
+<th>Set</th>
+<th>Dictionary</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Syntax</td>
+<td><code>[ ]</code></td>
+<td><code>( )</code></td>
+<td><code>{ }</code></td>
+<td><code>{ }</code></td>
+</tr>
+<tr>
+<td>Mutable</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Ordered</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes (Python 3.7+)</td>
+</tr>
+<tr>
+<td>Duplicates</td>
+<td>Allowed</td>
+<td>Allowed</td>
+<td>Not allowed</td>
+<td>Keys not allowed</td>
+</tr>
+<tr>
+<td>Indexing</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>By key</td>
+</tr>
+<tr>
+<td>Slicing</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Common Ops</td>
+<td><code>append()</code>, <code>insert()</code>, <code>remove()</code></td>
+<td>Concatenation, indexing</td>
+<td><code>add()</code>, <code>union()</code>, <code>intersection()</code></td>
+<td><code>keys()</code>, <code>values()</code>, <code>get()</code></td>
+</tr>
+<tr>
+<td>Best For</td>
+<td>Mutable ordered sequences</td>
+<td>Immutable sequences, return values</td>
+<td>Deduplication, set math</td>
+<td>Key-value lookups</td>
+</tr>
+</tbody></table>
+        </article>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var doc = document.documentElement;
+            var scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+            document.getElementById('progress-bar').style.width = Math.min(scrolled * 100, 100) + '%';
+        });
+    </script>
+</body>
+</html>

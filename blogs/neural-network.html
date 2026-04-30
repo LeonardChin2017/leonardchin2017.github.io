@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Neural Network?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --text:    #111;
+            --muted:   #666;
+            --border:  #e5e5e5;
+            --code-bg: #f6f6f6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #fff;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            padding: 0 20px 80px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--text);
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--text); }
+
+        .read-time { font-size: 13px; color: var(--muted); }
+
+        .post-header { margin-bottom: 40px; }
+
+        .post-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .post-date { font-size: 14px; color: var(--muted); }
+
+        .post-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Body content ── */
+        #post-body h1 { font-size: 1.75rem; font-weight: 700; margin: 2em 0 0.5em; letter-spacing: -0.02em; }
+        #post-body h2 { font-size: 1.35rem; font-weight: 600; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+        #post-body h3 { font-size: 1.1rem;  font-weight: 600; margin: 1.75em 0 0.4em; }
+        #post-body h4 { font-size: 1rem;    font-weight: 600; margin: 1.5em 0 0.4em; }
+
+        #post-body p { margin-bottom: 1.25em; }
+
+        #post-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+        #post-body a:hover { opacity: 0.6; }
+
+        #post-body ul, #post-body ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+        #post-body li { margin-bottom: 0.35em; }
+        #post-body li > ul, #post-body li > ol { margin-top: 0.35em; margin-bottom: 0; }
+
+        #post-body hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+        #post-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 1em;
+            color: var(--muted);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        #post-body img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        #post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 14px;
+            display: block;
+            overflow-x: auto;
+        }
+        #post-body th, #post-body td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        #post-body th {
+            background: var(--code-bg);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        #post-body tr:nth-child(even) td { background: #fafafa; }
+
+        /* Code */
+        #post-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #post-body pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            line-height: 1.55;
+        }
+        #post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        /* Override highlight.js background so our border shows */
+        #post-body pre code.hljs { background: transparent; padding: 0; }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 0 16px 60px; }
+            .post { padding-top: 32px; }
+            .post-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="post">
+        <nav class="post-nav">
+            <a class="back-link" href="javascript:history.back()">
+                &#8592; Back
+            </a>
+            <span class="read-time">5 min read</span>
+        </nav>
+
+        <header class="post-header">
+            <h1>What is Neural Network?</h1>
+            <p class="post-date">Published on Feb 11, 2022</p>
+        </header>
+
+        <hr class="post-divider">
+
+        <article id="post-body">
+<h2>AI vs ML vs DL</h2>
+<p>Understanding neural networks is key in the world of AI. These networks, inspired by the human brain, play a pivotal role in machine learning, powering applications like image recognition and natural language processing. While terms like AI, ML, and DL are often used interchangeably, they have unique meanings. Let&#39;s explore the differences.</p>
+<p><strong>AI (Artificial Intelligence)</strong> is the broader goal of creating intelligent machines, involving software that replicates human-like intelligence through predefined rules. Examples include virtual assistants like Siri, self-driving cars, and more. AI automates tasks, reasoning, and learning from data. It includes subsets like Machine Learning, Robotics, Natural Language Processing, Machine Vision, and Expert Systems.</p>
+<p>![AI Subsets](../resource/images/AI subsets.png)</p>
+<p><strong>ML (Machine Learning)</strong> is a part of AI where algorithms learn from data instead of following fixed rules. Unlike traditional AI, ML algorithms find patterns, make predictions, and offer suggestions based on past experiences. For instance, Netflix suggests shows based on your watching history, and fraud detection spots unusual transactions.</p>
+<p><strong>DL (Deep Learning)</strong> is a subset of ML that employs deep neural networks to learn intricate patterns from data. Inspired by the brain, these networks autonomously excel at complex feature learning. Examples include CNN for image analysis, RNN for sequences, and GAN for creative generation.</p>
+<h2>Perceptron vs Neuron</h2>
+<p><strong>Perceptron</strong> is an early type of neural network that always produced binary output based on a threshold. It is also known as a Linear Binary Classifier.</p>
+<p><strong>Neuron</strong> is a generalisation of the perceptron where the output is not necessarily binary, and it could employ a non-linear activation function.</p>
+<p><img src="../resource/images/neuron.PNG" alt="Neuron"></p>
+<h2>Deep Dive into Neural Network</h2>
+<p>In software engineering, think of artificial neural networks like a chain of circles. These circles represent neurons, and they come in three types: input (red), hidden (blue), and output (green).</p>
+<ul>
+<li><strong>Input neurons</strong> take numeric data, process it, and pass it to the next layer using special math functions. They also use preset weights to adjust the data along the way.</li>
+<li><strong>Hidden neurons</strong> receive data from input or other hidden neurons, perform their own calculations, and send it to the next layer.</li>
+<li><strong>Output neurons</strong> process the information and provide results, like saying &quot;yes&quot; or &quot;no&quot; or classifying what&#39;s in an image.</li>
+</ul>
+<p>![Neural Network](../resource/images/neural network.png)</p>
+<h3>Forward Propagation</h3>
+<p>Forward propagation is like sending a message through a network. You start with input data and move it forward, layer by layer. Each layer does some math on the data. In each layer, two important things happen:</p>
+<ol>
+<li>We calculate a <strong>weighted sum</strong> — adding up the data with special numbers (weights).</li>
+<li>We apply an <strong>activation function</strong> — adding non-linearity to the data flow.</li>
+</ol>
+<p>This whole process helps the network make better predictions.</p>
+<h3>Backward Propagation</h3>
+<p>Backpropagation comes into play after forward propagation is complete. It works backward through the network, using the errors detected in the forward pass to adjust the network&#39;s internal weights from output to input. This iterative process of forward and backward passes helps the network improve its accuracy over time.</p>
+<p>In simple terms: forward propagation makes predictions, and backpropagation corrects and refines those predictions.</p>
+<h3>Gradient Descent</h3>
+<p>Gradient descent relies on the insights provided by backpropagation to calculate gradients, which guide the network towards the optimal weight configuration that minimizes the cost function. The <strong>learning rate</strong> determines the step size taken along the gradient, influencing how swiftly the network converges.</p>
+<p>![Gradient Descent](../resource/images/Gradient Descent.PNG)</p>
+<h3>Cost Function</h3>
+<p>A cost function quantifies the disparity between predicted and expected values as a single number. They play a vital role in algorithms that use gradient descent for parameter optimization. Examples:</p>
+<table>
+<thead>
+<tr>
+<th>Cost Function</th>
+<th>Typical Use Scenario</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mean Squared Error</td>
+<td>Regression tasks — average squared difference between predicted and actual values</td>
+</tr>
+<tr>
+<td>Mean Absolute Error</td>
+<td>Regression — average absolute difference between predicted and actual values</td>
+</tr>
+<tr>
+<td>Binary Cross-Entropy</td>
+<td>Binary classification — measures how well the model predicts probabilities for two classes</td>
+</tr>
+<tr>
+<td>Hinge Loss</td>
+<td>SVMs and binary classification — encourages correct classification with a margin</td>
+</tr>
+<tr>
+<td>Multi-Class Cross-Entropy</td>
+<td>Multi-class classification problems</td>
+</tr>
+<tr>
+<td>Kullback Leibler Divergence</td>
+<td>Measuring difference between two probability distributions</td>
+</tr>
+</tbody></table>
+<p>![Cost Function Example](../resource/images/Cost Function Example1.PNG)</p>
+<h3>Activation Function</h3>
+<p>An activation function decides whether a neuron should be activated or not by calculating the weighted sum and adding bias. Its main purpose is to introduce <strong>non-linearity</strong> into the output of a neuron. Without them, a neural network would behave like a linear regression model.</p>
+<table>
+<thead>
+<tr>
+<th>Activation Function</th>
+<th>Typical Use Scenario</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sigmoid</td>
+<td>Binary classification — squashes output between 0 and 1, resembling a probability</td>
+</tr>
+<tr>
+<td>Hyperbolic Tangent (tanh)</td>
+<td>Similar to sigmoid but squashes output between -1 and 1, suitable for zero-centered data</td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td>Widely used in deep learning due to its simplicity and efficiency</td>
+</tr>
+</tbody></table>
+<p><img src="../resource/images/sigmoid.PNG" alt="Sigmoid"></p>
+<p>![Hyperbolic Tangent](../resource/images/Hyperbolic Tangent.PNG)</p>
+<p><img src="../resource/images/RELU.PNG" alt="ReLU"></p>
+<h3>Regularization</h3>
+<p>One of the greatest challenges in neural network training is <strong>overfitting</strong> — performing well on training data but poorly on unseen test data. Common regularization techniques:</p>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Brief Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Early Stopping</td>
+<td>Stops training when validation performance starts to degrade</td>
+</tr>
+<tr>
+<td>L1 and L2 Regularization</td>
+<td>Penalizes large weight values to prevent overfitting</td>
+</tr>
+<tr>
+<td>Data Augmentation</td>
+<td>Expands training dataset by applying transformations to existing data</td>
+</tr>
+<tr>
+<td>Dropout</td>
+<td>Randomly deactivates a fraction of neurons during each training step</td>
+</tr>
+<tr>
+<td>Additional Noise</td>
+<td>Introduces random noise during training to improve robustness</td>
+</tr>
+</tbody></table>
+<h3>Optimization</h3>
+<p>Optimizers are algorithms used to adjust the attributes of your neural network (weights, learning rate) to minimize losses.</p>
+<table>
+<thead>
+<tr>
+<th>Optimizer</th>
+<th>Brief Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Gradient Descent</td>
+<td>Uses gradients to iteratively adjust weights to minimize the loss function</td>
+</tr>
+<tr>
+<td>SGD</td>
+<td>Updates weights using a random subset of training data at each iteration</td>
+</tr>
+<tr>
+<td>Mini-Batch Gradient Descent</td>
+<td>Combines gradient descent and SGD using small random batches</td>
+</tr>
+<tr>
+<td>Adam</td>
+<td>Adapts learning rate per parameter, combines momentum and RMSprop</td>
+</tr>
+<tr>
+<td>RMSprop</td>
+<td>Adapts learning rate per parameter based on magnitude of recent gradients</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>Adds a fraction of previous weight update to current update</td>
+</tr>
+<tr>
+<td>Adagrad</td>
+<td>Adapts learning rates based on historical gradient information</td>
+</tr>
+</tbody></table>
+<h2>References</h2>
+<ul>
+<li><a href="https://towardsdatascience.com/what-the-hell-is-perceptron-626217814f53" target="_blank" rel="noopener">https://towardsdatascience.com/what-the-hell-is-perceptron-626217814f53</a></li>
+<li><a href="https://levity.ai/blog/difference-machine-learning-deep-learning" target="_blank" rel="noopener">https://levity.ai/blog/difference-machine-learning-deep-learning</a></li>
+<li><a href="https://www.kdnuggets.com/2016/11/quick-introduction-neural-networks.html" target="_blank" rel="noopener">https://www.kdnuggets.com/2016/11/quick-introduction-neural-networks.html</a></li>
+</ul>
+        </article>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var doc = document.documentElement;
+            var scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+            document.getElementById('progress-bar').style.width = Math.min(scrolled * 100, 100) + '%';
+        });
+    </script>
+</body>
+</html>

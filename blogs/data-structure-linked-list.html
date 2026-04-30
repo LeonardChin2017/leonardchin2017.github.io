@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structure: Linked List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --text:    #111;
+            --muted:   #666;
+            --border:  #e5e5e5;
+            --code-bg: #f6f6f6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #fff;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            padding: 0 20px 80px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--text);
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--text); }
+
+        .read-time { font-size: 13px; color: var(--muted); }
+
+        .post-header { margin-bottom: 40px; }
+
+        .post-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .post-date { font-size: 14px; color: var(--muted); }
+
+        .post-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Body content ── */
+        #post-body h1 { font-size: 1.75rem; font-weight: 700; margin: 2em 0 0.5em; letter-spacing: -0.02em; }
+        #post-body h2 { font-size: 1.35rem; font-weight: 600; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+        #post-body h3 { font-size: 1.1rem;  font-weight: 600; margin: 1.75em 0 0.4em; }
+        #post-body h4 { font-size: 1rem;    font-weight: 600; margin: 1.5em 0 0.4em; }
+
+        #post-body p { margin-bottom: 1.25em; }
+
+        #post-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+        #post-body a:hover { opacity: 0.6; }
+
+        #post-body ul, #post-body ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+        #post-body li { margin-bottom: 0.35em; }
+        #post-body li > ul, #post-body li > ol { margin-top: 0.35em; margin-bottom: 0; }
+
+        #post-body hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+        #post-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 1em;
+            color: var(--muted);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        #post-body img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        #post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 14px;
+            display: block;
+            overflow-x: auto;
+        }
+        #post-body th, #post-body td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        #post-body th {
+            background: var(--code-bg);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        #post-body tr:nth-child(even) td { background: #fafafa; }
+
+        /* Code */
+        #post-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #post-body pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            line-height: 1.55;
+        }
+        #post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        /* Override highlight.js background so our border shows */
+        #post-body pre code.hljs { background: transparent; padding: 0; }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 0 16px 60px; }
+            .post { padding-top: 32px; }
+            .post-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="post">
+        <nav class="post-nav">
+            <a class="back-link" href="javascript:history.back()">
+                &#8592; Back
+            </a>
+            <span class="read-time">3 min read</span>
+        </nav>
+
+        <header class="post-header">
+            <h1>Data Structure: Linked List</h1>
+            <p class="post-date">Published on Oct 20, 2021</p>
+        </header>
+
+        <hr class="post-divider">
+
+        <article id="post-body">
+<h2>Introduction</h2>
+<p>When I joined Continental Automotive as a software developer and took on the role of Warning Feature Responsible for a Full Digital Cluster project, I faced the challenge of designing a feature with complex requirements from the ground up. One key module required performing flexible and extensive insertion and deletion of warnings during runtime.</p>
+<p>I chose to implement a <strong>circular doubly linked list</strong> as the underlying data structure. Its O(1) time complexity for insertion and deletion, along with its straightforward implementation, made it the ideal choice for handling a substantial volume of real-time insertions and deletions.</p>
+<h2>Implementations</h2>
+<h3>Linked List in C++</h3>
+<pre><code class="hljs language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-type">int</span> value;
+    Node* next;
+    <span class="hljs-built_in">Node</span>(<span class="hljs-type">int</span> val) : <span class="hljs-built_in">value</span>(val), <span class="hljs-built_in">next</span>(<span class="hljs-literal">nullptr</span>) {}
+};
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">LinkedList</span> {
+<span class="hljs-keyword">public</span>:
+    Node* head;
+    <span class="hljs-built_in">LinkedList</span>() : <span class="hljs-built_in">head</span>(<span class="hljs-literal">nullptr</span>) {}
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">append</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> </span>{
+        Node* new_node = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(value);
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">nullptr</span>) {
+            head = new_node;
+        } <span class="hljs-keyword">else</span> {
+            Node* current = head;
+            <span class="hljs-keyword">while</span> (current-&gt;next != <span class="hljs-literal">nullptr</span>) {
+                current = current-&gt;next;
+            }
+            current-&gt;next = new_node;
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>{
+        Node* current = head;
+        <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">nullptr</span>) {
+            std::cout &lt;&lt; current-&gt;value &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+            current = current-&gt;next;
+        }
+        std::cout &lt;&lt; std::endl;
+    }
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    LinkedList my_list;
+    my_list.<span class="hljs-built_in">append</span>(<span class="hljs-number">1</span>);
+    my_list.<span class="hljs-built_in">append</span>(<span class="hljs-number">2</span>);
+    my_list.<span class="hljs-built_in">append</span>(<span class="hljs-number">3</span>);
+    my_list.<span class="hljs-built_in">display</span>();
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre>
+<blockquote>
+<p>In practice, you can use the C++ STL <code>std::list</code> which is much simpler.</p>
+</blockquote>
+<h3>Linked List in Python</h3>
+<pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, value</span>):
+        <span class="hljs-variable language_">self</span>.value = value
+        <span class="hljs-variable language_">self</span>.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">LinkedList</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-variable language_">self</span>.head = <span class="hljs-literal">None</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">append</span>(<span class="hljs-params">self, value</span>):
+        new_node = Node(value)
+        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.head <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            <span class="hljs-variable language_">self</span>.head = new_node
+        <span class="hljs-keyword">else</span>:
+            current = <span class="hljs-variable language_">self</span>.head
+            <span class="hljs-keyword">while</span> current.<span class="hljs-built_in">next</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:
+                current = current.<span class="hljs-built_in">next</span>
+            current.<span class="hljs-built_in">next</span> = new_node
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">display</span>(<span class="hljs-params">self</span>):
+        current = <span class="hljs-variable language_">self</span>.head
+        <span class="hljs-keyword">while</span> current <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:
+            <span class="hljs-built_in">print</span>(current.value, end=<span class="hljs-string">&#x27; &#x27;</span>)
+            current = current.<span class="hljs-built_in">next</span>
+        <span class="hljs-built_in">print</span>()
+
+my_list = LinkedList()
+my_list.append(<span class="hljs-number">1</span>)
+my_list.append(<span class="hljs-number">2</span>)
+my_list.append(<span class="hljs-number">3</span>)
+my_list.display()</code></pre>
+<h2>Why Circular Doubly Linked List?</h2>
+<p>The basic examples above show a simple singly linked list, but for my warning feature module I needed something more capable.</p>
+<p>A <strong>circular doubly linked list</strong> combines two ideas:</p>
+<ul>
+<li><strong>Doubly linked</strong> — each node knows both the previous and next node, allowing efficient forward and backward traversal. New warnings are inserted at the front of the current warning list.</li>
+<li><strong>Circular</strong> — the last node points back to the first, creating an endless loop. This allows warnings to cycle from the end back to the start — exactly what the requirements demanded.</li>
+</ul>
+<h2>Singly vs Doubly vs Circular Linked Lists</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use Case</th>
+<th>Advantages</th>
+<th>Considerations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Singly Linked List</td>
+<td>Linear, forward traversal</td>
+<td>Memory-efficient (one pointer per node)</td>
+<td>Use for stacks, queues, forward-only algorithms</td>
+</tr>
+<tr>
+<td>Doubly Linked List</td>
+<td>Forward and backward traversal</td>
+<td>Easy access to previous elements</td>
+<td>Use for deques and bidirectional traversal needs</td>
+</tr>
+<tr>
+<td>Circular Linked List</td>
+<td>Looped / cyclic structures</td>
+<td>Efficient for cyclic data management</td>
+<td>Use when elements need to cycle continuously</td>
+</tr>
+</tbody></table>
+<h2>Pros and Cons</h2>
+<h3>Pros</h3>
+<ol>
+<li><strong>Dynamic size</strong> — adjusts based on the number of elements</li>
+<li><strong>No memory waste</strong> — does not pre-allocate for unused elements</li>
+<li><strong>No overflow</strong> — as long as memory is available</li>
+<li><strong>O(1) insertion and deletion</strong> — only pointer updates are needed</li>
+</ol>
+<h3>Cons</h3>
+<ol>
+<li><strong>Extra memory</strong> — each node needs additional space for pointer(s)</li>
+<li><strong>Slow access</strong> — accessing the middle of a list is O(n)</li>
+<li><strong>No random access</strong> — cannot directly index to a specific position</li>
+<li><strong>Cache unfriendly</strong> — nodes are scattered in memory, causing more cache misses vs arrays</li>
+<li><strong>Memory fragmentation</strong> — over time, scattered allocation can decrease performance</li>
+</ol>
+        </article>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var doc = document.documentElement;
+            var scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+            document.getElementById('progress-bar').style.width = Math.min(scrolled * 100, 100) + '%';
+        });
+    </script>
+</body>
+</html>

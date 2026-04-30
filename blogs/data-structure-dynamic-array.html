@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structure: Dynamic Array</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --text:    #111;
+            --muted:   #666;
+            --border:  #e5e5e5;
+            --code-bg: #f6f6f6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #fff;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            padding: 0 20px 80px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--text);
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--text); }
+
+        .read-time { font-size: 13px; color: var(--muted); }
+
+        .post-header { margin-bottom: 40px; }
+
+        .post-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .post-date { font-size: 14px; color: var(--muted); }
+
+        .post-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Body content ── */
+        #post-body h1 { font-size: 1.75rem; font-weight: 700; margin: 2em 0 0.5em; letter-spacing: -0.02em; }
+        #post-body h2 { font-size: 1.35rem; font-weight: 600; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+        #post-body h3 { font-size: 1.1rem;  font-weight: 600; margin: 1.75em 0 0.4em; }
+        #post-body h4 { font-size: 1rem;    font-weight: 600; margin: 1.5em 0 0.4em; }
+
+        #post-body p { margin-bottom: 1.25em; }
+
+        #post-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+        #post-body a:hover { opacity: 0.6; }
+
+        #post-body ul, #post-body ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+        #post-body li { margin-bottom: 0.35em; }
+        #post-body li > ul, #post-body li > ol { margin-top: 0.35em; margin-bottom: 0; }
+
+        #post-body hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+        #post-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 1em;
+            color: var(--muted);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        #post-body img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        #post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 14px;
+            display: block;
+            overflow-x: auto;
+        }
+        #post-body th, #post-body td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        #post-body th {
+            background: var(--code-bg);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        #post-body tr:nth-child(even) td { background: #fafafa; }
+
+        /* Code */
+        #post-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #post-body pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            line-height: 1.55;
+        }
+        #post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        /* Override highlight.js background so our border shows */
+        #post-body pre code.hljs { background: transparent; padding: 0; }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 0 16px 60px; }
+            .post { padding-top: 32px; }
+            .post-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="post">
+        <nav class="post-nav">
+            <a class="back-link" href="javascript:history.back()">
+                &#8592; Back
+            </a>
+            <span class="read-time">2 min read</span>
+        </nav>
+
+        <header class="post-header">
+            <h1>Data Structure: Dynamic Array</h1>
+            <p class="post-date">Published on Oct 1, 2021</p>
+        </header>
+
+        <hr class="post-divider">
+
+        <article id="post-body">
+<p>Data structures always catch my interest, and I frequently encounter or use them in my projects. In this blog, I&#39;ll start with dynamic arrays.</p>
+<h2>What is a Dynamic Array?</h2>
+<p>A dynamic array (known as <code>vector</code> in C++) is a versatile data structure capable of holding a variable number of elements of the same data type. Unlike static arrays, dynamic arrays can expand in size by doubling their capacity when necessary.</p>
+<p>When the available space is exhausted, the underlying fixed-size array is enlarged — a costly operation that creates a larger array and copies existing elements. Other names include: array list, growable array, resizable array, and mutable array.</p>
+<h3>Dynamic Array in C++</h3>
+<pre><code class="hljs language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    std::vector&lt;<span class="hljs-type">int</span>&gt; dynamicArray;
+
+    dynamicArray.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1</span>);
+    dynamicArray.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">2</span>);
+    dynamicArray.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">3</span>);
+
+    std::cout &lt;&lt; <span class="hljs-string">&quot;Element at index 0: &quot;</span> &lt;&lt; dynamicArray[<span class="hljs-number">0</span>] &lt;&lt; std::endl;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre>
+<h3>Dynamic Array in Python</h3>
+<p>Python lists are essentially dynamic arrays — they resize automatically as needed.</p>
+<pre><code class="hljs language-python">dynamic_array = []
+
+dynamic_array.append(<span class="hljs-number">1</span>)
+dynamic_array.append(<span class="hljs-number">2</span>)
+dynamic_array.append(<span class="hljs-number">3</span>)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Element at index 0:&quot;</span>, dynamic_array[<span class="hljs-number">0</span>])</code></pre>
+<h2>Pros and Cons</h2>
+<h3>Pros</h3>
+<ol>
+<li><strong>Dynamic Expandability</strong> — grows as needed; no need to specify size in advance</li>
+<li><strong>Fast Lookups</strong> — O(1) constant-time access to any element by index</li>
+<li><strong>Cache-friendly</strong> — elements are stored in contiguous memory, optimizing CPU cache performance</li>
+</ol>
+<h3>Cons</h3>
+<ol>
+<li><strong>Slow Resize</strong> — resizing requires copying all elements to a new memory location</li>
+<li><strong>Memory Waste</strong> — often allocates more memory than strictly needed to accommodate future growth</li>
+<li><strong>Homogeneous Elements</strong> — can only store a single data type per array (in strongly typed languages)</li>
+</ol>
+<h2>Static Array vs Dynamic Array vs Linked List</h2>
+<table>
+<thead>
+<tr>
+<th>Criteria</th>
+<th align="center">Static Array</th>
+<th align="center">Dynamic Array</th>
+<th align="center">Linked List</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fixed number of elements</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>Efficient indexed access</td>
+<td align="center">✓</td>
+<td align="center">✓</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>Constant-time insertions/deletions</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✓</td>
+</tr>
+<tr>
+<td>Dynamic sizing</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center">✓</td>
+</tr>
+</tbody></table>
+<p><strong>Dynamic Arrays</strong> provide efficient indexed access but are slow for mid-list insertions and deletions — shifting all subsequent elements is required.</p>
+<p><strong>Linked Lists</strong> excel at constant-time insertions and deletions by updating pointers. However, they consume more memory per node (pointer overhead), and their scattered memory layout causes cache misses that make them slower in practice for common use cases.</p>
+<h2>Summary</h2>
+<p>Dynamic arrays are preferable for fast indexed access. Linked lists are ideal when constant-time insertions and deletions are essential — such as in real-time computing or dynamic data structures. Choose based on the dominant operation in your application.</p>
+        </article>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var doc = document.documentElement;
+            var scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+            document.getElementById('progress-bar').style.width = Math.min(scrolled * 100, 100) + '%';
+        });
+    </script>
+</body>
+</html>

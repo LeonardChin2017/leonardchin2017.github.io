@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leading Self Program: My DISC Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --text:    #111;
+            --muted:   #666;
+            --border:  #e5e5e5;
+            --code-bg: #f6f6f6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #fff;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            padding: 0 20px 80px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--text);
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--text); }
+
+        .read-time { font-size: 13px; color: var(--muted); }
+
+        .post-header { margin-bottom: 40px; }
+
+        .post-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .post-date { font-size: 14px; color: var(--muted); }
+
+        .post-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Body content ── */
+        #post-body h1 { font-size: 1.75rem; font-weight: 700; margin: 2em 0 0.5em; letter-spacing: -0.02em; }
+        #post-body h2 { font-size: 1.35rem; font-weight: 600; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+        #post-body h3 { font-size: 1.1rem;  font-weight: 600; margin: 1.75em 0 0.4em; }
+        #post-body h4 { font-size: 1rem;    font-weight: 600; margin: 1.5em 0 0.4em; }
+
+        #post-body p { margin-bottom: 1.25em; }
+
+        #post-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+        #post-body a:hover { opacity: 0.6; }
+
+        #post-body ul, #post-body ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+        #post-body li { margin-bottom: 0.35em; }
+        #post-body li > ul, #post-body li > ol { margin-top: 0.35em; margin-bottom: 0; }
+
+        #post-body hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+        #post-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 1em;
+            color: var(--muted);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        #post-body img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        #post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 14px;
+            display: block;
+            overflow-x: auto;
+        }
+        #post-body th, #post-body td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        #post-body th {
+            background: var(--code-bg);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        #post-body tr:nth-child(even) td { background: #fafafa; }
+
+        /* Code */
+        #post-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #post-body pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            line-height: 1.55;
+        }
+        #post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        /* Override highlight.js background so our border shows */
+        #post-body pre code.hljs { background: transparent; padding: 0; }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 0 16px 60px; }
+            .post { padding-top: 32px; }
+            .post-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="post">
+        <nav class="post-nav">
+            <a class="back-link" href="javascript:history.back()">
+                &#8592; Back
+            </a>
+            <span class="read-time">2 min read</span>
+        </nav>
+
+        <header class="post-header">
+            <h1>Leading Self Program: My DISC Report</h1>
+            <p class="post-date">Published on Jun 28, 2023</p>
+        </header>
+
+        <hr class="post-divider">
+
+        <article id="post-body">
+<h2>About the Leading Self Program</h2>
+<p>The Leading Self Program (LSP) is a program provided by Fish Camp Learning and sponsored by Continental Automotive that aims to enhance the soft skills of its employees. In this program, DISC is used to assess personality.</p>
+<p><img src="../resource/images/LSP.jpg" alt="LSP"></p>
+<h2>About DISC</h2>
+<p>The DISC profile traces its roots back to the early 1920s when it was introduced by psychologist William Moulton Marston. His model aimed to understand human behavior by identifying four primary types of behavioral expression based on a person&#39;s perception of themselves in relation to their environment.</p>
+<p>Today, DISC serves as a comprehensive tool for comprehending behavior strengths and limitations, enhancing communication styles, and fostering effective teamwork.</p>
+<p>The four styles:</p>
+<ul>
+<li><strong>Dominance (D)</strong> — Goal-oriented go-getters. They thrive on accomplishing tasks and radiate confidence. Motto: <em>&quot;Let&#39;s get things done!&quot;</em></li>
+<li><strong>Influence (I)</strong> — Social butterflies who love to connect with and persuade others. Their enthusiasm is infectious.</li>
+<li><strong>Steadiness (S)</strong> — Harmony-focused individuals who value stability and consistency. Always there to lend a hand.</li>
+<li><strong>Compliance (C)</strong> — Meticulous perfectionists who set high standards and focus on accuracy. Quality is their top priority.</li>
+</ul>
+<h2>My DISC Report</h2>
+<p>Based on the DISC report, I am a <strong>Designer Style (C &amp; D, predominantly C)</strong>.</p>
+<p>As a Designer, I am a highly task-oriented individual who is sensitive to problems. I am driven and have an effective problem-solving approach. My decision-making is based on facts rather than emotions, and I tend to be quiet and cautious in trusting others.</p>
+<p>I excel in analytical thinking and value fact-based techniques. I reject quick fixes. Commitment is essential to me, and I expect others to uphold their commitments as well. Quality is of utmost importance — a job should be done right or not at all.</p>
+<p>At times, I can become too absorbed in my work and struggle to delegate tasks. I have a strong desire to gather all the necessary facts before making decisions, which can be perceived as a delay by others.</p>
+<h3>General Characteristics of Designer Style People</h3>
+<ul>
+<li>Analytical</li>
+<li>High ego strength</li>
+<li>Problem solver</li>
+<li>Extremely task-oriented</li>
+</ul>
+<h3>Motivated By</h3>
+<ul>
+<li>Work and project completion</li>
+<li>Power and authority to design and implement solutions</li>
+<li>Not having to needlessly socialize or play politics</li>
+<li>Being provided the necessary tools to achieve success</li>
+</ul>
+<h3>Ideal Environment</h3>
+<ul>
+<li>Being able to design and refine</li>
+<li>Challenging tasks and activities</li>
+<li>Projects that produce tangible results</li>
+<li>Recognition for analytical abilities</li>
+</ul>
+<h2>My Personal Growth Areas as CD Style</h2>
+<ul>
+<li>Strive to be an &quot;active&quot; listener</li>
+<li>Be attentive to other team members&#39; ideas until everyone reaches a consensus</li>
+<li>Be friendlier and more approachable</li>
+<li>Develop a greater appreciation for the opinions, feelings, and desires of others</li>
+<li>Put more energy into personal relationships and team support</li>
+</ul>
+        </article>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var doc = document.documentElement;
+            var scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+            document.getElementById('progress-bar').style.width = Math.min(scrolled * 100, 100) + '%';
+        });
+    </script>
+</body>
+</html>

@@ -2,61 +2,61 @@ var blogData = [
     {
         title: "Docker: The Fundamentals",
         date: "Sept 25, 2023",
-        content: "In this blog, we'll dive into Docker, a tool that makes software work smoothly. We'll first understand how Docker acts like a 'container', holding software neatly. Then, we'll learn some basic tricks, like how to build these containers with Dockerfiles. If you're new to Docker, don't worry – this blog is your friendly guide to get started and make your software life easier.",
-        link: "blogs/DockerFundamental.html"
+        content: "In this blog, we'll dive into Docker, a tool that makes software work smoothly. We'll understand how Docker acts like a container, learn to build containers with Dockerfiles, and explore key instructions.",
+        link: "blogs/docker-fundamentals.html"
     },
     {
         title: "Leading Self Program: My DISC Report",
         date: "Jun 28, 2023",
         content: "The DISC profile is a method used to understand human behavior and personality, providing insights into how individuals think, act, and interact with others in specific environments.",
-        link: "blogs/Leading Self Program My DISC Report.html"
+        link: "blogs/disc-report.html"
     },
     {
         title: "What is Neural Network?",
         date: "Feb 11, 2022",
-        content: "This blog explains neural networks, their role in AI and machine learning, and how they've evolved. It clarifies distinctions between AI, ML, and deep learning, delves into data flow, learning from errors, and ways to enhance neural networks, making complex concepts accessible.",
-        link: "blogs/What is Neural Network.html"
+        content: "This blog explains neural networks, their role in AI and machine learning, and how they've evolved. It covers distinctions between AI, ML, and deep learning, forward/backward propagation, cost functions, activation functions, and regularization.",
+        link: "blogs/neural-network.html"
     },
     {
         title: "Exploring PostgreSQL: My Learning Notebook",
         date: "Dec 27, 2021",
-        content: "This blog post serves as my personal notes on what I have learned about PostgreSQL. It covers the setup process of PostgreSQL and pgadmin4 and provides a comprehensive list of SQL keywords and examples. Additionally, I compare PostgreSQL and MySQL, and discuss the distinctions between NoSQL and RDBMS.",
-        link: "blogs/Exploring PostgreSQL My Learning Notebook.html"
+        content: "My personal notes on PostgreSQL covering setup, a comprehensive list of SQL keywords and examples, comparison of PostgreSQL vs MySQL, and the differences between NoSQL and RDBMS.",
+        link: "blogs/postgresql-notebook.html"
     },
     {
         title: "Python: List vs Tuple vs Set vs Dict",
         date: "Oct 26, 2021",
-        content: "In Python, there are four basic data types: List, Tuple, Set, and Dictionary. These serve different purposes, so choosing the right one is important for efficient coding. This blog will explain when to use each type.",
-        link: "blogs/Data Structure List Dict Tuple Set.html"
+        content: "In Python, there are four basic data types: List, Tuple, Set, and Dictionary. These serve different purposes, so choosing the right one is important for efficient coding. This blog explains when to use each type.",
+        link: "blogs/python-data-types.html"
     },
     {
         title: "Data Structure: Hash Table",
         date: "Oct 25, 2021",
-        content: "Hash tables employ a hashing function for efficient key-to-value mapping, prioritizing time complexity. In a prior blog, I discussed the limitations of linked lists. Combining linked list with hash tables can alleviate these issues.",
-        link: "blogs/Data Structure Hash Table.html"
+        content: "Hash tables employ a hashing function for efficient key-to-value mapping, prioritizing time complexity. Combining linked lists with hash tables can retain insertion order while providing O(1) access.",
+        link: "blogs/data-structure-hash-table.html"
     },
     {
         title: "Data Structure: Stack vs Queue",
         date: "Oct 22, 2021",
-        content: "Queue and stack are abstract concepts for organizing data. They can be implemented with arrays or linked lists. A queue follows the 'First In, First Out' (FIFO) principle, while a stack follows the 'Last In, First Out' (LIFO) principle.",
-        link: "blogs/Data Structure Stack vs Queue.html"
+        content: "Queue and stack are abstract concepts for organizing data. A queue follows the First In, First Out (FIFO) principle, while a stack follows the Last In, First Out (LIFO) principle. Both can be implemented with arrays or linked lists.",
+        link: "blogs/data-structure-stack-queue.html"
     },
     {
         title: "Data Structure: Linked List",
         date: "Oct 20, 2021",
-        content: "I joined Continental Automotive as a software developer and took on the role of Warning Feature Responsible for a Full Digital Cluster project. I designed a feature with complex requirements, including quick insertion and deletion of warnings during runtime. To handle this, I implemented a circular doubly linked list as the data structure.",
-        link: "blogs/Data Structure Linked List.html"
+        content: "I implemented a circular doubly linked list at Continental Automotive for a warning feature requiring O(1) insertions and deletions at runtime. This blog covers singly, doubly, and circular linked lists with C++ and Python examples.",
+        link: "blogs/data-structure-linked-list.html"
     },
     {
         title: "Data Structure: Dynamic Array",
         date: "Oct 1, 2021",
-        content: "I'm fascinated by data structures and often use them in my projects. In this blog, I'll begin by discussing dynamic arrays.",
-        link: "blogs/Data Structure Dynamic Array.html"
+        content: "I'm fascinated by data structures and often use them in my projects. In this blog, I'll begin by discussing dynamic arrays — what they are, how they work, and when to use them over linked lists.",
+        link: "blogs/data-structure-dynamic-array.html"
     },
     {
         title: "Google Singapore Office Tour",
         date: "Jan 11, 2019",
         content: "Google Singapore Office One-Day Tour.",
-        link: "blogs/Google Singapore Office Tour.html"
+        link: "blogs/google-singapore-tour.html"
     },
 ];

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploring PostgreSQL: My Learning Notebook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --text:    #111;
+            --muted:   #666;
+            --border:  #e5e5e5;
+            --code-bg: #f6f6f6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #fff;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            padding: 0 20px 80px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--text);
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--text); }
+
+        .read-time { font-size: 13px; color: var(--muted); }
+
+        .post-header { margin-bottom: 40px; }
+
+        .post-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .post-date { font-size: 14px; color: var(--muted); }
+
+        .post-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Body content ── */
+        #post-body h1 { font-size: 1.75rem; font-weight: 700; margin: 2em 0 0.5em; letter-spacing: -0.02em; }
+        #post-body h2 { font-size: 1.35rem; font-weight: 600; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+        #post-body h3 { font-size: 1.1rem;  font-weight: 600; margin: 1.75em 0 0.4em; }
+        #post-body h4 { font-size: 1rem;    font-weight: 600; margin: 1.5em 0 0.4em; }
+
+        #post-body p { margin-bottom: 1.25em; }
+
+        #post-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+        #post-body a:hover { opacity: 0.6; }
+
+        #post-body ul, #post-body ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+        #post-body li { margin-bottom: 0.35em; }
+        #post-body li > ul, #post-body li > ol { margin-top: 0.35em; margin-bottom: 0; }
+
+        #post-body hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+        #post-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 1em;
+            color: var(--muted);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        #post-body img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        #post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 14px;
+            display: block;
+            overflow-x: auto;
+        }
+        #post-body th, #post-body td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        #post-body th {
+            background: var(--code-bg);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        #post-body tr:nth-child(even) td { background: #fafafa; }
+
+        /* Code */
+        #post-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #post-body pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            line-height: 1.55;
+        }
+        #post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        /* Override highlight.js background so our border shows */
+        #post-body pre code.hljs { background: transparent; padding: 0; }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 0 16px 60px; }
+            .post { padding-top: 32px; }
+            .post-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="post">
+        <nav class="post-nav">
+            <a class="back-link" href="javascript:history.back()">
+                &#8592; Back
+            </a>
+            <span class="read-time">3 min read</span>
+        </nav>
+
+        <header class="post-header">
+            <h1>Exploring PostgreSQL: My Learning Notebook</h1>
+            <p class="post-date">Published on Dec 27, 2021</p>
+        </header>
+
+        <hr class="post-divider">
+
+        <article id="post-body">
+<p>This blog post serves as my personal notes on what I have learned about PostgreSQL, covering setup, SQL keywords, and a comparison with MySQL and NoSQL.</p>
+<h2>RDBMS and NoSQL: Understanding Their Differences</h2>
+<p>NoSQL databases excel in scalability, making them suitable for handling large numbers of read-write operations with minimal latency. They offer flexibility in data modeling and prioritize eventual consistency, which is advantageous when immediate consistency is not critical.</p>
+<p>SQL-based RDBMS still possesses strengths such as a strong mathematical basis, declarative syntax, and the well-known Structured Query Language (SQL). <strong>NoSQL is not intended to replace SQL</strong> but rather to provide an alternative for non-relational data scenarios.</p>
+<p>In this blog, we will focus on RDBMS. Examples include PostgreSQL, MySQL, and SQLite.</p>
+<h2>PostgreSQL vs. MySQL: Which Is Better?</h2>
+<ul>
+<li><strong>PostgreSQL</strong> — recommended for applications that may scale to enterprise level, involve complex queries, and require frequent write operations.</li>
+<li><strong>MySQL</strong> — a good choice if you are new to databases, don&#39;t anticipate significant scaling, or need a quick prototyping tool.</li>
+</ul>
+<h2>Setup PostgreSQL</h2>
+<ul>
+<li>Download and install PostgreSQL: <a href="https://www.postgresql.org/download/" target="_blank" rel="noopener">https://www.postgresql.org/download/</a></li>
+<li>Download and install pgAdmin 4: <a href="https://www.pgadmin.org/download/pgadmin-4-windows/" target="_blank" rel="noopener">https://www.pgadmin.org/download/pgadmin-4-windows/</a></li>
+</ul>
+<h2>SQL Keywords &amp; Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Keyword</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SELECT</td>
+<td><code>SELECT * FROM tbl</code></td>
+<td>Select all rows and columns from table <code>tbl</code></td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td><code>SELECT c1,c2 FROM tbl</code></td>
+<td>Select specific columns</td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td><code>SELECT c1,c2 FROM tbl WHERE conditions ORDER BY c1 ASC, c2 DESC</code></td>
+<td>Filter and sort results</td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td><code>SELECT DISTINCT c1,c2 FROM tbl</code></td>
+<td>Select distinct rows</td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td><code>SELECT c1, aggregate(expr) FROM tbl GROUP BY c1</code></td>
+<td>Group and aggregate</td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td><code>SELECT c1, aggregate(expr) AS c2 FROM tbl GROUP BY c1 HAVING c2 &gt; v</code></td>
+<td>Filter grouped results</td>
+</tr>
+<tr>
+<td>INSERT INTO</td>
+<td><code>INSERT INTO tbl (c1, c2) VALUES (v1, v2)</code></td>
+<td>Insert data into a table</td>
+</tr>
+<tr>
+<td>INSERT INTO</td>
+<td><code>INSERT INTO tbl (c1, c2) SELECT c1, c2 FROM tb2 WHERE conditions</code></td>
+<td>Insert from another table</td>
+</tr>
+<tr>
+<td>UPDATE</td>
+<td><code>UPDATE tbl SET c1 = v1, c2 = v2 WHERE conditions</code></td>
+<td>Update data</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>DELETE FROM tbl WHERE conditions</code></td>
+<td>Delete records by condition</td>
+</tr>
+<tr>
+<td>TRUNCATE</td>
+<td><code>TRUNCATE TABLE tbl</code></td>
+<td>Drop and re-create table, all data is lost</td>
+</tr>
+<tr>
+<td>INNER JOIN</td>
+<td><code>SELECT * FROM tb1 INNER JOIN tb2 ON join-conditions</code></td>
+<td>Inner join two tables</td>
+</tr>
+<tr>
+<td>LEFT JOIN</td>
+<td><code>SELECT * FROM tb1 LEFT JOIN tb2 ON join-conditions</code></td>
+<td>Left join two tables</td>
+</tr>
+<tr>
+<td>RIGHT JOIN</td>
+<td><code>SELECT * FROM tb1 RIGHT JOIN tb2 ON join-conditions</code></td>
+<td>Right join two tables</td>
+</tr>
+<tr>
+<td>CREATE TABLE</td>
+<td><code>CREATE TABLE tbl (c1 datatype(length) PRIMARY KEY)</code></td>
+<td>Create a new table</td>
+</tr>
+<tr>
+<td>DROP TABLE</td>
+<td><code>DROP TABLE tbl</code></td>
+<td>Remove a table from the database</td>
+</tr>
+<tr>
+<td>ALTER TABLE</td>
+<td><code>ALTER TABLE tbl ADD COLUMN c1 datatype(length)</code></td>
+<td>Add a column</td>
+</tr>
+<tr>
+<td>ALTER TABLE</td>
+<td><code>ALTER TABLE tbl DROP COLUMN c1</code></td>
+<td>Drop a column</td>
+</tr>
+</tbody></table>
+        </article>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var doc = document.documentElement;
+            var scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+            document.getElementById('progress-bar').style.width = Math.min(scrolled * 100, 100) + '%';
+        });
+    </script>
+</body>
+</html>

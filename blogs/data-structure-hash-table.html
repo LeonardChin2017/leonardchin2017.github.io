@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structure: Hash Table</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --text:    #111;
+            --muted:   #666;
+            --border:  #e5e5e5;
+            --code-bg: #f6f6f6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #fff;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            padding: 0 20px 80px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--text);
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--text); }
+
+        .read-time { font-size: 13px; color: var(--muted); }
+
+        .post-header { margin-bottom: 40px; }
+
+        .post-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .post-date { font-size: 14px; color: var(--muted); }
+
+        .post-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Body content ── */
+        #post-body h1 { font-size: 1.75rem; font-weight: 700; margin: 2em 0 0.5em; letter-spacing: -0.02em; }
+        #post-body h2 { font-size: 1.35rem; font-weight: 600; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+        #post-body h3 { font-size: 1.1rem;  font-weight: 600; margin: 1.75em 0 0.4em; }
+        #post-body h4 { font-size: 1rem;    font-weight: 600; margin: 1.5em 0 0.4em; }
+
+        #post-body p { margin-bottom: 1.25em; }
+
+        #post-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+        #post-body a:hover { opacity: 0.6; }
+
+        #post-body ul, #post-body ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+        #post-body li { margin-bottom: 0.35em; }
+        #post-body li > ul, #post-body li > ol { margin-top: 0.35em; margin-bottom: 0; }
+
+        #post-body hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+        #post-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 1em;
+            color: var(--muted);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        #post-body img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        #post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 14px;
+            display: block;
+            overflow-x: auto;
+        }
+        #post-body th, #post-body td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        #post-body th {
+            background: var(--code-bg);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        #post-body tr:nth-child(even) td { background: #fafafa; }
+
+        /* Code */
+        #post-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #post-body pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            line-height: 1.55;
+        }
+        #post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        /* Override highlight.js background so our border shows */
+        #post-body pre code.hljs { background: transparent; padding: 0; }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 0 16px 60px; }
+            .post { padding-top: 32px; }
+            .post-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="post">
+        <nav class="post-nav">
+            <a class="back-link" href="javascript:history.back()">
+                &#8592; Back
+            </a>
+            <span class="read-time">2 min read</span>
+        </nav>
+
+        <header class="post-header">
+            <h1>Data Structure: Hash Table</h1>
+            <p class="post-date">Published on Oct 25, 2021</p>
+        </header>
+
+        <hr class="post-divider">
+
+        <article id="post-body">
+<h2>Introduction</h2>
+<p>Hash tables allow the mapping of keys to values using a <strong>hashing function</strong>. The hashing function computes the index of the key, which is then mapped to a specific value. This provides the hash table&#39;s greatest strength: very fast access time — O(1) on average.</p>
+<p>In a previous blog, I discussed the slow access drawback of linked lists. We can actually combine a hash table with a linked list to retain the order of insertion while providing quick access. An example of this in Java is <code>LinkedHashMap</code>.</p>
+<h2>Implementations</h2>
+<h3>Hash Table in C++</h3>
+<p>C++&#39;s <code>unordered_map</code> (introduced in C++11) functions as a hash map. It stores key-value pairs with no specific order, but is efficiently organized using a hash table for fast insertion, retrieval, and removal.</p>
+<p>In contrast, <code>std::map</code> maintains sorted order (implemented as a red-black tree).</p>
+<pre><code class="hljs language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    std::unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; hashMap;
+    <span class="hljs-type">int</span> arr[] = {<span class="hljs-number">20</span>, <span class="hljs-number">34</span>, <span class="hljs-number">56</span>, <span class="hljs-number">54</span>, <span class="hljs-number">76</span>, <span class="hljs-number">87</span>};
+    <span class="hljs-type">int</span> n = <span class="hljs-built_in">sizeof</span>(arr) / <span class="hljs-built_in">sizeof</span>(arr[<span class="hljs-number">0</span>]);
+
+    <span class="hljs-comment">// Insert elements</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
+        hashMap[arr[i]] = arr[i];
+    }
+
+    <span class="hljs-comment">// Delete an element</span>
+    hashMap.<span class="hljs-built_in">erase</span>(<span class="hljs-number">34</span>);
+
+    <span class="hljs-comment">// Display</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; pair : hashMap) {
+        std::cout &lt;&lt; pair.first &lt;&lt; <span class="hljs-string">&quot; ==&gt; &quot;</span> &lt;&lt; pair.second &lt;&lt; std::endl;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre>
+<h3>Hash Table in Python</h3>
+<p>Python&#39;s built-in dictionary is a hash table. Since Python 3.7, dictionaries maintain insertion order by default (like <code>LinkedHashMap</code> in Java). Before 3.7, you needed <code>OrderedDict</code> for this behavior.</p>
+<pre><code class="hljs language-python">hashMap = {}
+arr = [<span class="hljs-number">20</span>, <span class="hljs-number">34</span>, <span class="hljs-number">56</span>, <span class="hljs-number">54</span>, <span class="hljs-number">76</span>, <span class="hljs-number">87</span>]
+
+<span class="hljs-comment"># Insert elements</span>
+<span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> arr:
+    hashMap[num] = num
+
+<span class="hljs-comment"># Delete an element</span>
+<span class="hljs-keyword">if</span> <span class="hljs-number">34</span> <span class="hljs-keyword">in</span> hashMap:
+    <span class="hljs-keyword">del</span> hashMap[<span class="hljs-number">34</span>]
+
+<span class="hljs-comment"># Display</span>
+<span class="hljs-keyword">for</span> key, value <span class="hljs-keyword">in</span> hashMap.items():
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{key}</span> ==&gt; <span class="hljs-subst">{value}</span>&quot;</span>)</code></pre>
+<blockquote>
+<p>Note: In Python, a <code>set</code> is also implemented as a hash table, giving it O(1) membership checks.</p>
+</blockquote>
+<h2>Pros and Cons</h2>
+<h3>Pros</h3>
+<ul>
+<li><strong>O(1) average lookup</strong> — the hash code directly determines the storage location, regardless of map size.</li>
+<li><strong>O(1) average insertion</strong> — hashing doesn&#39;t depend on the size of the hash map.</li>
+</ul>
+<h3>Cons</h3>
+<ul>
+<li><strong>Rehashing overhead</strong> — too many insertions can trigger a full rebuild of the underlying data structure when the load factor threshold is exceeded.</li>
+<li><strong>Unordered iteration</strong> — elements don&#39;t come out in any particular order. Use <code>std::map</code> if you need sorted order.</li>
+</ul>
+<h2>When to Use <code>std::map</code> vs <code>std::unordered_map</code></h2>
+<p><strong>Use <code>std::map</code> (ordered) when:</strong></p>
+<ul>
+<li>You need elements in sorted order by key</li>
+<li>You need to find the smallest or largest key quickly</li>
+<li>You want to iterate in ascending/descending order</li>
+<li>The problem involves range queries</li>
+</ul>
+<p><strong>Use <code>std::unordered_map</code> (hash map) when:</strong></p>
+<ul>
+<li>You need fast key-based access and order doesn&#39;t matter</li>
+<li>You need to count or track occurrences efficiently</li>
+<li>You need fast insertions and deletions without ordering</li>
+</ul>
+        </article>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var doc = document.documentElement;
+            var scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+            document.getElementById('progress-bar').style.width = Math.min(scrolled * 100, 100) + '%';
+        });
+    </script>
+</body>
+</html>

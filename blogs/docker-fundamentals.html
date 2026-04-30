@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker: The Fundamentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --text:    #111;
+            --muted:   #666;
+            --border:  #e5e5e5;
+            --code-bg: #f6f6f6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #fff;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            padding: 0 20px 80px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--text);
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--text); }
+
+        .read-time { font-size: 13px; color: var(--muted); }
+
+        .post-header { margin-bottom: 40px; }
+
+        .post-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .post-date { font-size: 14px; color: var(--muted); }
+
+        .post-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Body content ── */
+        #post-body h1 { font-size: 1.75rem; font-weight: 700; margin: 2em 0 0.5em; letter-spacing: -0.02em; }
+        #post-body h2 { font-size: 1.35rem; font-weight: 600; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+        #post-body h3 { font-size: 1.1rem;  font-weight: 600; margin: 1.75em 0 0.4em; }
+        #post-body h4 { font-size: 1rem;    font-weight: 600; margin: 1.5em 0 0.4em; }
+
+        #post-body p { margin-bottom: 1.25em; }
+
+        #post-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+        #post-body a:hover { opacity: 0.6; }
+
+        #post-body ul, #post-body ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+        #post-body li { margin-bottom: 0.35em; }
+        #post-body li > ul, #post-body li > ol { margin-top: 0.35em; margin-bottom: 0; }
+
+        #post-body hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+        #post-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 1em;
+            color: var(--muted);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        #post-body img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        #post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 14px;
+            display: block;
+            overflow-x: auto;
+        }
+        #post-body th, #post-body td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        #post-body th {
+            background: var(--code-bg);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        #post-body tr:nth-child(even) td { background: #fafafa; }
+
+        /* Code */
+        #post-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #post-body pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            line-height: 1.55;
+        }
+        #post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        /* Override highlight.js background so our border shows */
+        #post-body pre code.hljs { background: transparent; padding: 0; }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 0 16px 60px; }
+            .post { padding-top: 32px; }
+            .post-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="post">
+        <nav class="post-nav">
+            <a class="back-link" href="javascript:history.back()">
+                &#8592; Back
+            </a>
+            <span class="read-time">3 min read</span>
+        </nav>
+
+        <header class="post-header">
+            <h1>Docker: The Fundamentals</h1>
+            <p class="post-date">Published on Sept 25, 2023</p>
+        </header>
+
+        <hr class="post-divider">
+
+        <article id="post-body">
+<p><img src="../resource/images/dokcer_banner.png" alt="Docker Banner"></p>
+<p>At long last, I&#39;ve found the time to delve into the core concepts of Docker in my blog. Docker has become a ubiquitous presence in the software industry. But what exactly is Docker? Docker is, at its core, a <strong>container runtime</strong>. (Other well-known container runtimes include Podman and CRI-O.) These container runtimes serve as an intermediary layer positioned between the host operating system and individual container instances.</p>
+<p>But let&#39;s back up a bit. What is a container? A container is a technology that empowers us to isolate specific kernel processes, effectively convincing them that they are the sole inhabitants of an entirely new computer. Containers stand in stark contrast to virtual machines. While a virtual machine requires an entire guest operating system to be installed within the host operating system, a container shares the host OS kernel and merely carries its distinct set of binaries. In simpler terms, there&#39;s no need for a completely separate operating system within your host OS. This key difference eliminates one of the most significant drawbacks of virtual machines — the substantial computational overhead of virtualizing hardware for a guest OS.</p>
+<p>Containers offer another impressive advantage: they can gracefully terminate and re-emerge when load balancing demands it. Whether a container ceases to exist due to a crash or because it&#39;s no longer needed during periods of low server traffic, containers are cost-effective to launch, and they are designed to appear and disappear seamlessly.</p>
+<h2>Installation</h2>
+<p>For installation, simply refer to the official Docker page: <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank" rel="noopener">https://docs.docker.com/desktop/install/windows-install/</a></p>
+<p>After installation, you should be able to launch Docker Desktop.</p>
+<p><img src="../resource/images/docker_window.jpg" alt="Docker Desktop"></p>
+<h2>Basic Instructions in Dockerfile</h2>
+<p>Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image.</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FROM [IMAGE]</code></td>
+<td>A Dockerfile must start with a FROM instruction, specifying the underlying OS architecture for building the image. Choose a base image such as Ubuntu, CentOS, or Alpine (only 5MB).</td>
+</tr>
+<tr>
+<td><code>COPY [SRC] [DEST]</code></td>
+<td>Duplicates files or directories from SRC and integrates them into the container&#39;s file system at the path DEST.</td>
+</tr>
+<tr>
+<td><code>ADD [SRC] [DEST]</code></td>
+<td>Incorporates files or directories into a Docker image. Supports URL sources and auto-extracts compressed files.</td>
+</tr>
+<tr>
+<td><code>CMD</code></td>
+<td>Sets default parameters that can be overridden through the Docker CLI when the container is running.</td>
+</tr>
+<tr>
+<td><code>ENTRYPOINT</code></td>
+<td>Defines default parameters that cannot be altered when Docker containers are executed with CLI parameters.</td>
+</tr>
+<tr>
+<td><code>RUN [COMMANDS]</code></td>
+<td>Mainly used to construct images and install applications and packages. Creates a new layer atop an existing image.</td>
+</tr>
+<tr>
+<td><code>EXPOSE [PORT]</code></td>
+<td>Opens the specified port for inter-container communication.</td>
+</tr>
+<tr>
+<td><code>VOLUME</code></td>
+<td>Establishes a mount point and designates it as a location for externally mounted volumes from the host or other containers.</td>
+</tr>
+</tbody></table>
+<h2>Additional Notes</h2>
+<ul>
+<li>You can use <code>docker rmi -f IMAGEID</code> to remove a dangling image.</li>
+<li>When copying files into a Dockerfile, you have two options: <code>ADD</code> and <code>COPY</code>.<ul>
+<li><code>ADD</code> is the older command — it supports local and URL sources, and automatically extracts compressed files.</li>
+<li><code>COPY</code> was introduced to address limitations of <code>ADD</code>, offering a more straightforward approach by only duplicating files or directories in their current format, exclusively supporting locally stored content.</li>
+<li>Docker best practices recommend using <code>COPY</code> over <code>ADD</code> for transparency, especially when copying from the local build context.</li>
+<li>Avoid using <code>ADD</code> for downloading packages from URLs — use <code>wget</code> or <code>curl</code> inside a <code>RUN</code> command instead to minimize image layers.</li>
+</ul>
+</li>
+</ul>
+        </article>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var doc = document.documentElement;
+            var scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+            document.getElementById('progress-bar').style.width = Math.min(scrolled * 100, 100) + '%';
+        });
+    </script>
+</body>
+</html>

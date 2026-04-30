@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-blog-converter",
+  "version": "1.0.0",
+  "description": "Converts blog markdown files to HTML",
+  "scripts": {
+    "convert": "node convert-blogs.js"
+  },
+  "devDependencies": {
+    "highlight.js": "^11.9.0",
+    "marked": "^9.1.6"
+  }
+}
