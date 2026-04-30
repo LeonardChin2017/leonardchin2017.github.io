@@ -1,580 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' type='text/css'>
+    <!-- Bootstrap 3 — used only for carousel -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/project.css">
+</head>
+<body>
+<div class="projects-container">
 
-    <style>
-      .link_text {
-        color: black;
-        font-weight: bold;
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      .link_text:hover {
-        color: #0000FF; /* Change the color to your preferred hover color */
-        text-decoration: underline;
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 8px 16px;
-        font-size: 14px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        white-space: nowrap;
-        border-radius: 4px;
-        border: 1px solid #000;
-        color: #000;
-        background-color: #fff;
-      }
-
-      .btn:hover {
-        background-color: #000;
-        color: #fff;
-      }
-
-      .btn-secondary {
-        border-color: #000;
-        color: #000;
-      }
-
-      .btn-secondary:hover {
-        background-color: #000;
-        color: #fff;
-      }
-
-    </style>
-  </head>
-
-  <body onload="self.scrollTo(0,0)">
-    <div class="loding_class" id="loading_class">
-      <div class="load" id="load"></div>
-      <div class="container">
-        <div class="center">Please wait while we load the content. This page contains multiple images that may take some time to load.. </div>
-      </div>
-    </div>
-    
-
-    <div id="main_content" class="container mt-5 mb-5" style="visibility: hidden;">
-        <div class="d-flex justify-content-center row">
-            <div class="col-md-10">
-                <div class="row p-2 bg-white border rounded">
-
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                          <li data-target="#myCarousel" data-slide-to="1"></li>
-                          <li data-target="#myCarousel" data-slide-to="2"></li>
-                        </ol>
-                      
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                          <div class="item active">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/ABURBC_2016.PNG" alt="ABU ROBOCON 2016">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 42%; left: 92%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
+    <!-- ── ABU ROBOCON Bangkok 2016 ───────────────────────────────────────── -->
+    <div class="project-card">
+        <div class="project-gallery">
+            <div id="c1" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#c1" data-slide-to="0" class="active"></li>
+                    <li data-target="#c1" data-slide-to="1"></li>
+                    <li data-target="#c1" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="img-wrap">
+                            <img src="resource/images/ABURBC_2016.PNG" alt="ABU ROBOCON 2016">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:42%;left:92%">Me</div>
                             </div>
-                          </div>
-                      
-                          <div class="item">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/ABURBC_2016_Lab.jpg" alt="UTM Robocon Team 2016">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 32%; left: 58%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      
-                          <div class="item">
-                            <img class="d-block w-100" src="resource/images/ABURBC_2016_GameField.jpg" alt="Gamefield at Bangkok">
-                          </div>
                         </div>
-                      
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </div>
-                
-                    <div class="col-md-12 mt-1">
-                        <h5 style="padding-top:10px;">ABU ROBOCON Bangkok 2016 (Champion) </h5>
-                        <hr/>                       
-                        <p class="body_text">
-                            <b class="blue-text">Champion</b> of ABU ROBOCON Contest held at Bangkok. I was in charge of STM32, Machine Vision, ROS and Android app development. The theme for RBC 2016 is "Green Energy Recharging the World", saw the participation of 17 best teams from 16 countries including Japan, Korea, China, Hong Kong, Vietnam, India, and Pakistan.
-                        </p>        
-                        <p class="link_text">
-                            <a href="https://www.nst.com.my/news/2016/08/167506/utm-beats-chinas-northeastern-university-emerge-champions-robocon-2016" target="_blank" rel="noopener noreferrer"> New Straits Times: UTM beats China's Northeastern University to emerge champions in Robocon 2016 </a>
-                        </p>    
-                        <p class="link_text">
-                            <a href="https://utmrbc.herokuapp.com/team.php" target="_blank" rel="noopener noreferrer"> UTM Robocon Team Homepage </a>
-                        </p>     
-                        <p class="link_text">
-                            <a href="https://business.facebook.com/utmrbc/?ref=py_c" target="_blank" rel="noopener noreferrer"> UTM Robocon Team Facebook Page </a>
-                            <br><br>
-                        </p>         
                     </div>
-                    <!-- <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-column mt-0"><a href="https://www.nst.com.my/news/2016/08/167506/utm-beats-chinas-northeastern-university-emerge-champions-robocon-2016" target="_blank " class="btn btn-primary btn-sm custom_btn"><p style="padding-top: 5px;">Details</p></a></div>
-                    </div> -->
-                </div>
-
-                <div class="row p-2 bg-white border rounded">
-                    <div id="myCarousel2" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                          <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
-                          <li data-target="#myCarousel2" data-slide-to="1"></li>
-                          <li data-target="#myCarousel2" data-slide-to="2"></li>
-                          <li data-target="#myCarousel2" data-slide-to="3"></li>
-                        </ol>
-                      
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                          <div class="item active">                          
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/ABURBC_2017.PNG" alt="ABU ROBOCON 2017">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 37%; left: 50%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
+                    <div class="item">
+                        <div class="img-wrap">
+                            <img src="resource/images/ABURBC_2016_Lab.jpg" alt="UTM Robocon Team 2016">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:32%;left:58%">Me</div>
                             </div>
-                          </div>
-                      
-                          <div class="item">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/First Runner Up.jpg" alt="First Runner Up">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 37%; left: 58%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      
-                          <div class="item">
-                            <img  src="resource/images/RBC_2017_Tokyo_GameField.PNG" alt="Tokyo Game Field">
-                          </div>
-
-                          <div class="item">
-                            <img  src="resource/images/RBC_2017_Opening_Show.PNG" alt="Tokyo Robocon Opening Show">
-                          </div>
                         </div>
-                      
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel2" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel2" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </div>
-                    <!-- <div class="col-md-3 mt-1 outer_center" onclick="window.parent.parent.scrollTo(0,100)"><img id="myImg" class="img-responsive rounded product-image inner_center myImages" src="resource/images/ABURBC_2017.PNG" alt="ABU ROBOCON 2017" ></div>
-                    <div class="col-md-3 mt-1 outer_center" onclick="window.parent.parent.scrollTo(0,100)"><img id="myImg" class="img-responsive rounded product-image inner_center myImages" src="resource/images/First Runner Up.jpg" alt="First Runner Up" ></div>
-                    <div class="col-md-3 mt-1 outer_center" onclick="window.parent.parent.scrollTo(0,100)"><img id="myImg" class="img-responsive rounded product-image inner_center myImages" src="resource/images/RBC_2017_Tokyo_GameField.PNG" alt="Tokyo Game Field" ></div>
-                    <div class="col-md-3 mt-1 outer_center" onclick="window.parent.parent.scrollTo(0,100)"><img id="myImg" class="img-responsive rounded product-image inner_center myImages" src="resource/images/RBC_2017_Opening_Show.PNG" alt="Tokyo Robocon Opening Show" ></div> -->
-                    <div class="col-md-12 mt-1">
-                        <h5 style="padding-top:10px;">ABU ROBOCON Tokyo 2017 (First Runner Up)</h5>
-                        <hr/>                       
-                        <p class="body_text">
-                            <b class="blue-text">First Runner Up </b>of ABU ROBOCON Contest held at Tokyo. I was leading the development of STM32 and successfully deploy custom-made and working PCB using STM32F4 MCU on robot within 1 year. I am also leading mobile app development related topics in the team. The mobile app is written in Java and IDE is Android Studio.
-                        </p> 
-                        <p class="link_text">
-                            <a href="https://news.utm.my/2017/09/utm-is-the-1st-runner-up-for-abu-asia-pacific-robot-contest-robocon-2017-tokyo/" target="_blank" rel="noopener noreferrer"> UTM is the 1st Runner-Up for ABU Asia-Pacific Robot Contest (ROBOCON) 2017 Tokyo </a>
-                        </p>  
-                        <p class="link_text">
-                            <a href="https://www.youtube.com/watch?v=iXrQ8yU1vZI" target="_blank" rel="noopener noreferrer"> Youtube: Quarter Final Match Malaysia vs Japan </a>
-                        </p>    
-                        <p class="link_text">
-                            <a href="https://www.youtube.com/watch?v=huzm9mrEZJE&list=PLIGxraJczqOHj_BGvhkg-KLsZcZHi6TWl" target="_blank" rel="noopener noreferrer"> Youtube: Final Match Malaysia vs Vietnam </a>
-                            <br><br>
-                        </p>                       
                     </div>
-                    <!-- <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-column mt-0"><a href="https://news.utm.my/2017/09/utm-is-the-1st-runner-up-for-abu-asia-pacific-robot-contest-robocon-2017-tokyo/" target="_blank " class="btn btn-primary btn-sm custom_btn"><p style="padding-top: 5px;"> Details</p></a></div>
-                    </div> -->
-                </div>
-
-                <div class="row p-2 bg-white border rounded">
-
-                    <div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                          <li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
-                          <li data-target="#myCarousel3" data-slide-to="1"></li>
-                          <li data-target="#myCarousel3" data-slide-to="2"></li>
-                          <li data-target="#myCarousel3" data-slide-to="3"></li>
-                        </ol>
-                      
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                          <div class="item active">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/ImagineCupMalaysia.PNG" alt="Imagine Cup Malaysia Winner">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 37%; left: 65%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      
-                          <div class="item">
-                            <img src="resource/images/ImageCup_TheDay.PNG" alt="Image Cup Day 1">
-                          </div>
-                      
-                          <div class="item">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/MicrosoftImageCup_GroupPhoto.PNG" alt="Health Sight Team Photo">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 40%; left: 64%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="item">
-                            <img  src="resource/images/MicrosoftImagineCup_Project.PNG" alt="Health Sight">
-                          </div>
-                        </div>
-                      
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel3" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel3" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </div>
-
-                    <div class="col-md-12 mt-1">
-                        <h5 style="padding-top:10px;"> Health Sight </h5>
-                        <hr/>                       
-                        <p class="body_text">
-                            Health Sight has won the <b class="blue-text">Champion of Microsoft Imagine Cup Malaysia </b> in 2018. Health Sight is an intelligent surveillance system that can understand and predict activities and movements of the patients, using deep learning technology, to prevent unwanted incidents.
-                        </p>   
-                        <p class="link_text">
-                            <a href="https://news.utm.my/2018/03/utm-wins-again-at-the-malaysia-microsoft-imagine-cup-national-final-2018/" target="_blank" rel="noopener noreferrer"> UTM wins again at the Malaysia Microsoft Imagine Cup National Final 2018 </a>
-                        </p>     
-                        <p class="link_text">
-                            <a href="https://www.youtube.com/watch?v=r3Mukb6G9os" target="_blank" rel="noopener noreferrer"> Youtube: Microsoft Imagine Cup 2018 APAC Regional Finals </a>
-                            <br><br>
-                        </p>                  
+                    <div class="item">
+                        <img src="resource/images/ABURBC_2016_GameField.jpg" alt="Gamefield at Bangkok">
                     </div>
-                    <!-- <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-column mt-0"><a href="https://news.utm.my/2018/03/utm-wins-again-at-the-malaysia-microsoft-imagine-cup-national-final-2018/" target="_blank " class="btn btn-primary btn-sm custom_btn"><p style="padding-top: 5px;">Details</p></a></div>
-                    </div> -->
                 </div>
-
-                <div class="row p-2 bg-white border rounded">
-                    <div id="myCarousel4" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                          <li data-target="#myCarousel4" data-slide-to="0" class="active"></li>
-                          <li data-target="#myCarousel4" data-slide-to="1"></li>
-                          <li data-target="#myCarousel4" data-slide-to="2"></li>
-                          <li data-target="#myCarousel4" data-slide-to="3"></li>
-                        </ol>
-                      
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                          <div class="item active">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/EzPark_Awards.PNG" alt="EzPark Award Ceremony">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 17%; left: 43%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="item">
-                            <img src="resource/images/EzPark.PNG" alt="EzPark's Poster">
-                          </div>
-                      
-                          <div class="item">
-                            <img src="resource/images/EzPark_Setup.PNG" alt="EZPark Setup">
-                          </div>
-                      
-                          <div class="item">
-                            <img  src="resource/images/CapPark_Capturing.PNG" alt="Free Parking Slot Capturing">
-                          </div>
-                        </div>
-                      
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel4" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel4" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </div>
-    
-                    <div class="col-md-12 mt-1">
-                        <h5 style="padding-top:10px;"> EzPark </h5>
-                        <hr/>                       
-                        <p class="body_text">
-                            EzPark is developed to help users to find available parking spot in Malaysia. EzPark has won the <b class="blue-text">Theme Award </b>in FKE Capstone Project. I was the leader of the team. I was in charge of Android Mobile App development, computer vision algorithm to detect free parking lots, and cloud setup using Firebase.
-                        </p>   
-                        
-                        <a href="https://github.com/LeonardChin2017/SmartParkingApp-EzPark" target="_blank " rel="noopener noreferrer" role="button" class="btn btn-secondary btn-sm"> View Code </a>
-                        <br><br>
-                    </div>
-                    <!-- <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-column mt-0"><a href="https://github.com/LeonardChin2017/SmartParkingApp-EzPark" target="_blank " class="btn btn-secondary btn-dark btn-sm"> View Code </a></div>
-                    </div> -->
-                </div>
-
-                <div class="row p-2 bg-white border rounded">
-
-                    <div id="myCarousel5" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                          <li data-target="#myCarousel5" data-slide-to="0" class="active"></li>
-                          <li data-target="#myCarousel5" data-slide-to="1"></li>
-                          <li data-target="#myCarousel5" data-slide-to="2"></li>
-                          <li data-target="#myCarousel5" data-slide-to="3"></li>
-                        </ol>
-                      
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-
-                          <div class="item active">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/InnovateMalaysia_GroupPhoto.PNG" alt="Group Photo">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 50%; left: 48%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="item">
-                            <img src="resource/images/InsightX.PNG" alt="InsightX's Poster">
-                          </div>
-
-                          <div class="item">
-                            <img  src="resource/images/InsightX_App.PNG" alt="InsightX Mobile Application">
-                          </div>
-
-                          <div class="item">
-                            <img  src="resource/images/InsightX_AR.PNG" alt="InsightX Augmented Reality">
-                          </div>
-                        </div>
-                      
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel5" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel5" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </div>
-
-                    <!-- <div class="col-md-3 mt-1 outer_center" onclick="window.parent.parent.scrollTo(0,100)"><img id="myImg" class="img-responsive rounded product-image inner_center myImages" src="resource/images/InsightX.PNG" alt="InsightX's Poster" ></div>
-                    <div class="col-md-3 mt-1 outer_center" onclick="window.parent.parent.scrollTo(0,100)"><img id="myImg" class="img-responsive rounded product-image inner_center myImages" src="resource/images/InnovateMalaysia_GroupPhoto.PNG" alt="Group Photo" ></div>
-                    <div class="col-md-3 mt-1 outer_center" onclick="window.parent.parent.scrollTo(0,100)"><img id="myImg" class="img-responsive rounded product-image inner_center myImages" src="resource/images/InsightX_App.PNG" alt="InsightX Mobile Application" ></div>
-                    <div class="col-md-3 mt-1 outer_center" onclick="window.parent.parent.scrollTo(0,100)"><img id="myImg" class="img-responsive rounded product-image inner_center myImages" src="resource/images/InsightX_AR.PNG" alt="InsightX Augmented Reality" ></div> -->
-                    <div class="col-md-12 mt-1">
-                        <h5 style="padding-top:10px;"> InsightX </h5>
-                        <hr/>                       
-                        <p class="body_text">
-                            InsightX has won the <b class="blue-text">Regional Winner of Innovate Malaysia (SAS Track) 2018</b>. InsightX is a robotics diagnosis system based on big data analytics and machine learning.
-                        </p>  
-                        <p class="link_text">
-                            <a href="https://xcite.utm.my/utm-triumphed-the-innovate-malaysia-design-competition-2018-winning-12-prizes-from-16-categories/" target="_blank" rel="noopener noreferrer"> UTM triumphed the Innovate Malaysia Design Competition 2018 winning 12 Prizes from 16 Categories </a>
-                            <br><br>
-                        </p>                    
-                    </div>
-                    <!-- <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-column mt-0"><a href="https://xcite.utm.my/utm-triumphed-the-innovate-malaysia-design-competition-2018-winning-12-prizes-from-16-categories/" target="_blank " class="btn btn-primary btn-sm custom_btn"><p style="padding-top: 5px;">Details</p></a></div>
-                    </div> -->
-                </div>
-
-                <div class="row p-2 bg-white border rounded">
-                    <div id="myCarousel6" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                          <li data-target="#myCarousel6" data-slide-to="0" class="active"></li>
-                          <li data-target="#myCarousel6" data-slide-to="1"></li>
-                          <li data-target="#myCarousel6" data-slide-to="2"></li>
-                        </ol>
-                      
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                          <div class="item active">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/TGL.PNG" alt="The Grand Design Challenge">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 30%; left: 59%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      
-                          <div class="item">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/MESO_Team.PNG" alt="MESO Team Photo">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 42%; left: 61%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      
-                          <div class="item">
-                            <div class="image-container">
-                              <img class="d-block w-100" src="resource/images/IoT Hackathon.PNG" alt="IoT Hackathon">
-                              <div class="tag-overlay">
-                                <div class="tag" style="top: 55%; left: 25%;">
-                                  <span class="name-overlay">Me</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel6" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel6" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </div>
-                    <div class="col-md-12 mt-1">
-                        <h5 style="padding-top:10px;"> MESO </h5>
-                        <hr/>                       
-                        <p class="body_text">
-                            MESO has won the <b class="blue-text">Champion of The Grand Design (TGL) Challenge and Champion of IoT Hackathon</b>. MESO is a machinery diagnosis and predictive maintenance system.
-                        </p>   
-                        <p class="link_text">
-                            <a href="https://news.utm.my/2017/11/fke-student-team-won-the-great-lab-grand-design-challenge-2017/" target="_blank" rel="noopener noreferrer"> FKE Student Team won The Great Lab Grand Design Challenge 2017 </a>
-                            <br><br>
-                        </p>                      
-                    </div>
-                    <!-- <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-column mt-0"><a href="https://news.utm.my/2017/11/fke-student-team-won-the-great-lab-grand-design-challenge-2017/" target="_blank " class="btn btn-primary btn-sm custom_btn"><p style="padding-top: 5px;">Details</p></a></div>
-                    </div> -->
-                </div>
-
-                <div class="row p-2 bg-white border rounded">
-                    <div id="myCarousel7" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                          <li data-target="#myCarousel7" data-slide-to="0" class="active"></li>
-                        </ol>
-                      
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                          <div class="item active">
-                            <img src="resource/images/MyPortFolio.PNG" alt="My Portfolio">
-                          </div>
-                        </div>
-                      
-                        <!-- Left and right controls -->
-                        <!-- <a class="left carousel-control" href="#myCarousel7" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel7" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a> -->
-                      </div>
-                    <div class="col-md-12 mt-1">
-                        <h5 style="padding-top:10px;">  My Website </h5>
-                        <hr/>                       
-                        <p class="body_text">
-                            My portfolio website. Written in HTML, CSS, and Javascript.
-                        </p>  
-                        <a href="https://github.com/LeonardChin2017/leonardchin2017.github.io" target="_blank " rel="noopener noreferrer" role="button" class="btn btn-secondary btn-sm"> View Code </a>
-                        <br><br>                    
-                    </div>
-                    <!-- <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-column mt-0"><a href="https://github.com/LeonardChin2017/leonardchin2017.github.io" target="_blank " class="btn btn-primary btn-sm custom_btn"><i class="fab fa-git"></i></a></div>
-                    </div> -->
-                </div>
+                <a class="left carousel-control" href="#c1" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#c1" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="project-info">
+            <h3 class="project-title">ABU ROBOCON Bangkok 2016</h3>
+            <div class="award-badges">
+                <span class="award-badge">🏆 Champion</span>
+            </div>
+            <p class="project-desc">
+                Champion of ABU ROBOCON Contest held at Bangkok, with participation of 17 best teams from 16 countries including Japan, Korea, China, Vietnam, India, and Pakistan. I was in charge of STM32, Machine Vision, ROS, and Android app development.
+            </p>
+            <div class="project-links">
+                <a class="project-link" href="https://www.nst.com.my/news/2016/08/167506/utm-beats-chinas-northeastern-university-emerge-champions-robocon-2016" target="_blank" rel="noopener">NST: UTM beats China's Northeastern University to emerge champions in Robocon 2016</a>
+                <a class="project-link" href="https://utmrbc.herokuapp.com/team.php" target="_blank" rel="noopener">UTM Robocon Team Homepage</a>
+                <a class="project-link" href="https://business.facebook.com/utmrbc/?ref=py_c" target="_blank" rel="noopener">UTM Robocon Team Facebook Page</a>
             </div>
         </div>
     </div>
 
-    <div id="myModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
+    <!-- ── ABU ROBOCON Tokyo 2017 ─────────────────────────────────────────── -->
+    <div class="project-card">
+        <div class="project-gallery">
+            <div id="c2" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#c2" data-slide-to="0" class="active"></li>
+                    <li data-target="#c2" data-slide-to="1"></li>
+                    <li data-target="#c2" data-slide-to="2"></li>
+                    <li data-target="#c2" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="img-wrap">
+                            <img src="resource/images/ABURBC_2017.PNG" alt="ABU ROBOCON 2017">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:37%;left:50%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="img-wrap">
+                            <img src="resource/images/First Runner Up.jpg" alt="First Runner Up">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:37%;left:58%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/RBC_2017_Tokyo_GameField.PNG" alt="Tokyo Game Field">
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/RBC_2017_Opening_Show.PNG" alt="Tokyo Robocon Opening Show">
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#c2" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#c2" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="project-info">
+            <h3 class="project-title">ABU ROBOCON Tokyo 2017</h3>
+            <div class="award-badges">
+                <span class="award-badge">🥈 First Runner Up</span>
+            </div>
+            <p class="project-desc">
+                First Runner Up of ABU ROBOCON held at Tokyo. I led the STM32 development and successfully deployed a custom PCB using STM32F4 MCU on the robot within 1 year. Also led mobile app development for the team, written in Java using Android Studio.
+            </p>
+            <div class="project-links">
+                <a class="project-link" href="https://news.utm.my/2017/09/utm-is-the-1st-runner-up-for-abu-asia-pacific-robot-contest-robocon-2017-tokyo/" target="_blank" rel="noopener">UTM is the 1st Runner-Up for ABU ROBOCON 2017 Tokyo</a>
+                <a class="project-link" href="https://www.youtube.com/watch?v=iXrQ8yU1vZI" target="_blank" rel="noopener">YouTube: Quarter Final — Malaysia vs Japan</a>
+                <a class="project-link" href="https://www.youtube.com/watch?v=huzm9mrEZJE" target="_blank" rel="noopener">YouTube: Final — Malaysia vs Vietnam</a>
+            </div>
+        </div>
     </div>
 
-    <script>
-      document.onreadystatechange = function() {
-          // For testing
-          // document.querySelector(
-          //       "#main_content").style.visibility = "hidden";
-          // document.querySelector(
-          //   "#load").style.visibility = "visible";
-              
-        
-          if (document.readyState !== "complete") {
-              document.querySelector(
-                "#main_content").style.visibility = "hidden";
-              document.querySelector(
-                "#loading_class").style.visibility = "visible";
-          } else {
-            setTimeout(function (){
-              document.querySelector(
-                "#loading_class").style.display = "none";
-              document.querySelector(
-                "#main_content").style.visibility = "visible";
-            }, 1000);
-              
-          }
-      };
-      
-    </script>
-    
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="scripts/project.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <!-- ── Health Sight ───────────────────────────────────────────────────── -->
+    <div class="project-card">
+        <div class="project-gallery">
+            <div id="c3" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#c3" data-slide-to="0" class="active"></li>
+                    <li data-target="#c3" data-slide-to="1"></li>
+                    <li data-target="#c3" data-slide-to="2"></li>
+                    <li data-target="#c3" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="img-wrap">
+                            <img src="resource/images/ImagineCupMalaysia.PNG" alt="Imagine Cup Malaysia Winner">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:37%;left:65%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/ImageCup_TheDay.PNG" alt="Imagine Cup Day">
+                    </div>
+                    <div class="item">
+                        <div class="img-wrap">
+                            <img src="resource/images/MicrosoftImageCup_GroupPhoto.PNG" alt="Health Sight Team Photo">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:40%;left:64%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/MicrosoftImagineCup_Project.PNG" alt="Health Sight">
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#c3" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#c3" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="project-info">
+            <h3 class="project-title">Health Sight</h3>
+            <div class="award-badges">
+                <span class="award-badge">🏆 Microsoft Imagine Cup Malaysia 2018</span>
+            </div>
+            <p class="project-desc">
+                An intelligent surveillance system that uses deep learning to understand and predict the activities and movements of patients, preventing unwanted incidents. Won the Champion of Microsoft Imagine Cup Malaysia 2018.
+            </p>
+            <div class="project-links">
+                <a class="project-link" href="https://news.utm.my/2018/03/utm-wins-again-at-the-malaysia-microsoft-imagine-cup-national-final-2018/" target="_blank" rel="noopener">UTM wins again at Malaysia Microsoft Imagine Cup National Final 2018</a>
+                <a class="project-link" href="https://www.youtube.com/watch?v=r3Mukb6G9os" target="_blank" rel="noopener">YouTube: Microsoft Imagine Cup 2018 APAC Regional Finals</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── EzPark ─────────────────────────────────────────────────────────── -->
+    <div class="project-card">
+        <div class="project-gallery">
+            <div id="c4" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#c4" data-slide-to="0" class="active"></li>
+                    <li data-target="#c4" data-slide-to="1"></li>
+                    <li data-target="#c4" data-slide-to="2"></li>
+                    <li data-target="#c4" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="img-wrap">
+                            <img src="resource/images/EzPark_Awards.PNG" alt="EzPark Award Ceremony">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:17%;left:43%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/EzPark.PNG" alt="EzPark Poster">
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/EzPark_Setup.PNG" alt="EzPark Setup">
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/CapPark_Capturing.PNG" alt="Free Parking Slot Detection">
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#c4" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#c4" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="project-info">
+            <h3 class="project-title">EzPark</h3>
+            <div class="award-badges">
+                <span class="award-badge">🏆 FKE Capstone Theme Award</span>
+            </div>
+            <p class="project-desc">
+                An app that helps users find available parking spots in Malaysia using computer vision. Won the Theme Award in FKE Capstone Project. I led the team and was in charge of Android app development, parking lot detection algorithm, and Firebase cloud setup.
+            </p>
+            <div class="project-links">
+                <a class="btn-code" href="https://github.com/LeonardChin2017/SmartParkingApp-EzPark" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    View Code
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── InsightX ───────────────────────────────────────────────────────── -->
+    <div class="project-card">
+        <div class="project-gallery">
+            <div id="c5" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#c5" data-slide-to="0" class="active"></li>
+                    <li data-target="#c5" data-slide-to="1"></li>
+                    <li data-target="#c5" data-slide-to="2"></li>
+                    <li data-target="#c5" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="img-wrap">
+                            <img src="resource/images/InnovateMalaysia_GroupPhoto.PNG" alt="Group Photo">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:50%;left:48%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/InsightX.PNG" alt="InsightX Poster">
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/InsightX_App.PNG" alt="InsightX Mobile App">
+                    </div>
+                    <div class="item">
+                        <img src="resource/images/InsightX_AR.PNG" alt="InsightX Augmented Reality">
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#c5" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#c5" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="project-info">
+            <h3 class="project-title">InsightX</h3>
+            <div class="award-badges">
+                <span class="award-badge">🏆 Innovate Malaysia — Regional Winner (SAS Track) 2018</span>
+            </div>
+            <p class="project-desc">
+                A robotics diagnosis system based on big data analytics and machine learning. Won the Regional Winner of Innovate Malaysia Design Competition (SAS Track) 2018.
+            </p>
+            <div class="project-links">
+                <a class="project-link" href="https://xcite.utm.my/utm-triumphed-the-innovate-malaysia-design-competition-2018-winning-12-prizes-from-16-categories/" target="_blank" rel="noopener">UTM triumphed Innovate Malaysia 2018 — winning 12 prizes from 16 categories</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── MESO ───────────────────────────────────────────────────────────── -->
+    <div class="project-card">
+        <div class="project-gallery">
+            <div id="c6" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#c6" data-slide-to="0" class="active"></li>
+                    <li data-target="#c6" data-slide-to="1"></li>
+                    <li data-target="#c6" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="img-wrap">
+                            <img src="resource/images/TGL.PNG" alt="The Grand Design Challenge">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:30%;left:59%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="img-wrap">
+                            <img src="resource/images/MESO_Team.PNG" alt="MESO Team Photo">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:42%;left:61%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="img-wrap">
+                            <img src="resource/images/IoT Hackathon.PNG" alt="IoT Hackathon">
+                            <div class="tag-overlay">
+                                <div class="tag" style="top:55%;left:25%">Me</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#c6" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#c6" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="project-info">
+            <h3 class="project-title">MESO</h3>
+            <div class="award-badges">
+                <span class="award-badge">🏆 TGL Champion</span>
+                <span class="award-badge">🏆 IoT Hackathon Champion</span>
+            </div>
+            <p class="project-desc">
+                A machinery diagnosis and predictive maintenance system. Won Champion of The Grand Design (TGL) Challenge and Champion of IoT Hackathon.
+            </p>
+            <div class="project-links">
+                <a class="project-link" href="https://news.utm.my/2017/11/fke-student-team-won-the-great-lab-grand-design-challenge-2017/" target="_blank" rel="noopener">FKE Student Team won The Great Lab Grand Design Challenge 2017</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── My Website ─────────────────────────────────────────────────────── -->
+    <div class="project-card">
+        <div class="project-gallery">
+            <div id="c7" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="resource/images/MyPortFolio.PNG" alt="My Portfolio Website">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-info">
+            <h3 class="project-title">My Portfolio Website</h3>
+            <p class="project-desc">
+                This portfolio website. Written in HTML, CSS, and JavaScript.
+            </p>
+            <div class="project-links">
+                <a class="btn-code" href="https://github.com/LeonardChin2017/leonardchin2017.github.io" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    View Code
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+    .project-gallery img { cursor: zoom-in; }
+</style>
+
+<script>
+(function () {
+    var parentDoc = (window.parent || window).document;
+    var LB_ID     = 'portfolio-lightbox';
+    var images    = [];   // current gallery's image src list
+    var idx       = 0;    // current index
+
+    // ── Build lightbox in parent window ──────────────────────────────────
+    function getLightbox() {
+        var existing = parentDoc.getElementById(LB_ID);
+        if (existing) return existing;
+
+        var s = function (el, css) { el.style.cssText = css; return el; };
+
+        // Overlay
+        var lb = s(parentDoc.createElement('div'), [
+            'display:none', 'position:fixed', 'inset:0', 'z-index:99999',
+            'background:rgba(0,0,0,0.9)',
+            'align-items:center', 'justify-content:center'
+        ].join(';'));
+        lb.id = LB_ID;
+
+        // Image
+        var img = s(parentDoc.createElement('img'), [
+            'max-width:82vw', 'max-height:88vh',
+            'border-radius:6px',
+            'box-shadow:0 8px 40px rgba(0,0,0,0.5)',
+            'object-fit:contain',
+            'transition:opacity 0.15s ease',
+            'user-select:none'
+        ].join(';'));
+
+        // Nav button factory
+        function navBtn(html, right) {
+            var btn = s(parentDoc.createElement('button'), [
+                'position:absolute',
+                right ? 'right:20px' : 'left:20px',
+                'top:50%', 'transform:translateY(-50%)',
+                'background:rgba(255,255,255,0.12)',
+                'border:none', 'color:#fff',
+                'font-size:28px', 'line-height:1',
+                'width:48px', 'height:48px',
+                'border-radius:50%',
+                'cursor:pointer',
+                'display:flex', 'align-items:center', 'justify-content:center',
+                'transition:background 0.15s'
+            ].join(';'));
+            btn.innerHTML = html;
+            btn.onmouseover = function () { this.style.background = 'rgba(255,255,255,0.25)'; };
+            btn.onmouseout  = function () { this.style.background = 'rgba(255,255,255,0.12)'; };
+            return btn;
+        }
+
+        var prevBtn = navBtn('&#8592;', false);
+        var nextBtn = navBtn('&#8594;', true);
+
+        // Counter  e.g. "2 / 4"
+        var counter = s(parentDoc.createElement('span'), [
+            'position:absolute', 'bottom:20px', 'left:50%',
+            'transform:translateX(-50%)',
+            'color:rgba(255,255,255,0.6)',
+            'font-size:13px',
+            'font-family:system-ui,sans-serif',
+            'user-select:none'
+        ].join(';'));
+
+        // Close ×
+        var closeBtn = s(parentDoc.createElement('button'), [
+            'position:absolute', 'top:16px', 'right:20px',
+            'background:none', 'border:none', 'color:#fff',
+            'font-size:34px', 'line-height:1',
+            'cursor:pointer', 'opacity:0.7', 'padding:0'
+        ].join(';'));
+        closeBtn.innerHTML = '&times;';
+
+        // Keyframes
+        var style = parentDoc.createElement('style');
+        style.textContent = '@keyframes lb-in{from{opacity:0;transform:scale(0.94)}to{opacity:1;transform:scale(1)}}';
+        parentDoc.head.appendChild(style);
+
+        // ── Actions ──────────────────────────────────────────────────────
+        function close() { lb.style.display = 'none'; }
+
+        function show(i) {
+            idx = (i + images.length) % images.length;
+            img.style.opacity = '0';
+            setTimeout(function () {
+                img.src = images[idx].src;
+                img.alt = images[idx].alt;
+                img.style.opacity = '1';
+            }, 100);
+            counter.textContent = (idx + 1) + ' / ' + images.length;
+            prevBtn.style.display = images.length > 1 ? 'flex' : 'none';
+            nextBtn.style.display = images.length > 1 ? 'flex' : 'none';
+        }
+
+        prevBtn.addEventListener('click', function (e) { e.stopPropagation(); show(idx - 1); });
+        nextBtn.addEventListener('click', function (e) { e.stopPropagation(); show(idx + 1); });
+        closeBtn.addEventListener('click', close);
+        lb.addEventListener('click', close);
+        img.addEventListener('click', function (e) { e.stopPropagation(); });
+
+        (window.parent || window).addEventListener('keydown', function (e) {
+            if (lb.style.display === 'none') return;
+            if (e.key === 'Escape')     close();
+            if (e.key === 'ArrowRight') show(idx + 1);
+            if (e.key === 'ArrowLeft')  show(idx - 1);
+        });
+
+        lb.appendChild(img);
+        lb.appendChild(prevBtn);
+        lb.appendChild(nextBtn);
+        lb.appendChild(counter);
+        lb.appendChild(closeBtn);
+        parentDoc.body.appendChild(lb);
+        lb._show = show;
+        return lb;
+    }
+
+    // ── Wire up each gallery ──────────────────────────────────────────────
+    document.querySelectorAll('.project-gallery').forEach(function (gallery) {
+        var imgs = gallery.querySelectorAll('img');
+        imgs.forEach(function (img, i) {
+            img.addEventListener('click', function (e) {
+                e.stopPropagation();
+                // Build image list from this gallery
+                images = Array.from(imgs).map(function (im) {
+                    return { src: im.src, alt: im.alt || '' };
+                });
+                var lb = getLightbox();
+                lb.style.display = 'flex';
+                lb._show(i);
+            });
+        });
+    });
+})();
+</script>
+</body>
 </html>

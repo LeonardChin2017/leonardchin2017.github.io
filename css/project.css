@@ -1,223 +1,189 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background: #fff; /* Set white background */
-  color: #000; /* Set black text color */
+    background: #fff;
+    color: #111;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
 }
 
-.ratings i {
-  color: #000; /* Set black color for ratings */
+/* ── Page container ──────────────────────────────────────────────────────── */
+.projects-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 24px 56px;
 }
 
-.custom_btn {
-  background-color: #000; /* Set black background for custom button */
-  color: #fff; /* Set white text color for custom button */
+/* ── Project card ────────────────────────────────────────────────────────── */
+.project-card {
+    display: flex;
+    gap: 40px;
+    padding: 36px 0;
+    border-bottom: 1px solid #e8e8e8;
+    align-items: center;
 }
 
-.spec-1 {
-  color: #000; /* Set black color for spec-1 */
+.project-card:last-child { border-bottom: none; }
+
+/* ── Gallery (left) ──────────────────────────────────────────────────────── */
+.project-gallery {
+    width: 44%;
+    flex-shrink: 0;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #000; /* Set black background for primary button */
-  border-color: #000; /* Set black border color for primary button */
+.project-gallery .carousel {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f0f0f0;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  background-color: #000; /* Set black background on hover/focus for primary button */
-  border-color: #000; /* Set black border color on hover/focus for primary button */
-}
-
-a:hover {
-  color: #000; /* Set black color on hover for links */
-}
-
-a {
-  color: #000; /* Set black color for links */
-}
-
-.line-height-example {
-  line-height: 10px;
-  min-height: 10px;
-}
-
-/* Modal Image Styling */
-/* Style the Image Used to Trigger the Modal */
-#myImg {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#myImg:hover {
-  opacity: 0.7;
-}
-
-.modal {
-  display: none;
-  /* Hidden by default */
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  padding-top: 100px;
-  /* Location of the box */
-  left: 0;
-  top: 0;
-  min-height: 100%;
-  height: auto;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: #000;
-  /* Set black background color */
-  background-color: rgba(0, 0, 0, 0.9);
-  /* Black w/ opacity */
-}
-
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-}
-
-#caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
-}
-
-.modal-content,
-#caption {
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-@keyframes zoom {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-  color: #ccc;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-@media only screen and (max-width: 700px) {
-  .modal-content {
+.project-gallery img {
     width: 100%;
-  }
+    height: 250px;
+    object-fit: cover;
+    display: block;
 }
 
-.carousel {
-  height: auto;
+/* Carousel controls */
+.carousel-control {
+    width: 32px;
+    background-image: none !important;
+    background: rgba(0,0,0,0.25) !important;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.carousel-control:hover { background: rgba(0,0,0,0.5) !important; }
+.carousel-control.left  { border-radius: 0 4px 4px 0; }
+.carousel-control.right { border-radius: 4px 0 0 4px; }
+
+.carousel-indicators { bottom: 6px; }
+.carousel-indicators li {
+    width: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.55);
+    border: none;
+    border-radius: 50%;
+    margin: 0 3px;
+}
+.carousel-indicators .active {
+    width: 6px;
+    height: 6px;
+    background: #fff;
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes loading {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
-}
-
-.load {
-  width: 100%;
-  height: 10px;
-  margin: 110px auto 0;
-  background-color: #000;
-  animation: loading 2s ease-in-out infinite;
-}
-
-.container {
-  display: flex;
-  margin-top: 30px;
-  justify-content: center;
-}
-
-/* CSS */
-.image-container {
-  position: relative;
-  display: inline-block;
-}
-
+/* "Me" tag overlay */
+.img-wrap { position: relative; display: block; }
 .tag-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
 }
-
 .tag {
-  position: absolute;
-  top: 50%;
-  left: 90%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 4px 8px;
-  border-radius: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.72);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+.img-wrap:hover .tag { opacity: 1; }
+
+/* ── Project info (right) ────────────────────────────────────────────────── */
+.project-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-.image-container:hover .tag {
-  opacity: 1;
+.project-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    line-height: 1.3;
 }
 
-.name-overlay {
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
+.award-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.award-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: #111;
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 4px;
+}
+
+.project-desc {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.75;
+    margin-bottom: 18px;
+}
+
+/* ── Links ───────────────────────────────────────────────────────────────── */
+.project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.project-link {
+    font-size: 13px;
+    color: #111;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.project-link:hover { opacity: 0.55; color: #111; }
+
+.btn-code {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    color: #111;
+    text-decoration: none;
+    width: fit-content;
+    transition: background 0.15s, border-color 0.15s;
+}
+.btn-code:hover {
+    background: #f5f5f5;
+    border-color: #999;
+    text-decoration: none;
+    color: #111;
+}
+.btn-code svg { flex-shrink: 0; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 680px) {
+    .project-card {
+        flex-direction: column;
+        gap: 20px;
+        padding: 28px 0;
+    }
+    .project-gallery { width: 100%; }
+    .project-gallery img { height: 200px; }
+    .project-title { font-size: 17px; }
 }
